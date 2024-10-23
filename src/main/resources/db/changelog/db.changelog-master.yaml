@@ -1,0 +1,15 @@
+databaseChangeLog:
+  # Include all SQL files from the install directory
+  - includeAll:
+      path: install
+      relativeToChangelogFile: true
+
+  # Include all SQL files from the data directory
+  - includeAll:
+      path: demo-data
+      relativeToChangelogFile: true
+
+  # Include all SQL files from the update directory
+  # - includeAll:
+  #     path: update
+  #     relativeToChangelogFile: true
