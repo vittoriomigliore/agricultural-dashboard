@@ -7,12 +7,12 @@ import static org.springframework.test.util.AssertionErrors.assertEquals;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 
-public class DailyRainSimulatorTest {
-    private DailyRainSimulator simulator;
+public class RainSimulatorTest {
+    private RainSimulator simulator;
 
     @BeforeEach
     public void setUp() {
-        simulator = new DailyRainSimulator();
+        simulator = new RainSimulator();
     }
 
     @Test

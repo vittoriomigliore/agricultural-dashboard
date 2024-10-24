@@ -2,7 +2,7 @@ package it.vittoriomigliore.agriculturaldashboard.simulator;
 
 import java.util.Random;
 
-public class DailyRainSimulator {
+public class RainSimulator {
     private double dailyRainProbability; // Probability of rain for the day
     private final Random random;
 
@@ -10,7 +10,7 @@ public class DailyRainSimulator {
     private static final double minPrecipitation = 0.1; // Minimum precipitation
     private static final double maxPrecipitation = 5.0; // Maximum precipitation
 
-    public DailyRainSimulator() {
+    public RainSimulator() {
         this.random = new Random();
         generateDailyRainProbability(); // Initialize with the first day's rain probability
     }
