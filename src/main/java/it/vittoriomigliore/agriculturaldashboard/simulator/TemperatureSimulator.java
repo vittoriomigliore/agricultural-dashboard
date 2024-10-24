@@ -2,7 +2,7 @@ package it.vittoriomigliore.agriculturaldashboard.simulator;
 
 import java.util.Random;
 
-public class DailyTemperatureSimulator {
+public class TemperatureSimulator {
     private double dailyMeanTemperature;
     private double dailyStandardDeviation;
     private final Random random;
@@ -13,7 +13,7 @@ public class DailyTemperatureSimulator {
     private static final double stdDevMin = 1.0; // Minimum daily standard deviation
     private static final double stdDevMax = 5.0; // Maximum daily standard deviation
 
-    public DailyTemperatureSimulator() {
+    public TemperatureSimulator() {
         this.random = new Random();
         generateDailyTemperatureParameters(); // Initialize with first day's parameters
     }

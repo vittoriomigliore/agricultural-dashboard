@@ -5,20 +5,20 @@ import org.junit.jupiter.api.Test;
 
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
-public class DailyTemperatureSimulatorTest {
-    private DailyTemperatureSimulator dailyTemperatureSimulator;
+public class TemperatureSimulatorTest {
+    private TemperatureSimulator temperatureSimulator;
 
     @BeforeEach
     public void setUp() {
-        dailyTemperatureSimulator = new DailyTemperatureSimulator();
+        temperatureSimulator = new TemperatureSimulator();
     }
 
     @Test
     public void testGenerateDailyTemperatureParameters() {
-        dailyTemperatureSimulator.generateDailyTemperatureParameters();
+        temperatureSimulator.generateDailyTemperatureParameters();
 
-        double dailyMean = dailyTemperatureSimulator.getDailyMeanTemperature();
-        double dailyStdDev = dailyTemperatureSimulator.getDailyStandardDeviation();
+        double dailyMean = temperatureSimulator.getDailyMeanTemperature();
+        double dailyStdDev = temperatureSimulator.getDailyStandardDeviation();
 
         // Verify mean is within the expected range
         assertTrue("Daily mean temperature should be between 15 and 30",
@@ -33,12 +33,12 @@ public class DailyTemperatureSimulatorTest {
     @Test
     public void testSimulateTemperatureForMinute() {
         // Generate parameters for the day
-        dailyTemperatureSimulator.generateDailyTemperatureParameters();
-        double dailyMean = dailyTemperatureSimulator.getDailyMeanTemperature();
-        double dailyStdDev = dailyTemperatureSimulator.getDailyStandardDeviation();
+        temperatureSimulator.generateDailyTemperatureParameters();
+        double dailyMean = temperatureSimulator.getDailyMeanTemperature();
+        double dailyStdDev = temperatureSimulator.getDailyStandardDeviation();
 
         for (int i = 0; i < 1000; i++) { // Simulate 1000 temperature readings
-            double temperature = dailyTemperatureSimulator.simulateTemperatureForMinute();
+            double temperature = temperatureSimulator.simulateTemperatureForMinute();
 
             // Verify that the temperature is reasonably within range
             assertTrue("Temperature should be within 4 standard deviations of the mean",
@@ -49,14 +49,14 @@ public class DailyTemperatureSimulatorTest {
     // Test to verify that mean temperature across multiple samples is close to the daily mean
     @Test
     public void testTemperatureDistributionOverDay() {
-        dailyTemperatureSimulator.generateDailyTemperatureParameters();
-        double dailyMean = dailyTemperatureSimulator.getDailyMeanTemperature();
+        temperatureSimulator.generateDailyTemperatureParameters();
+        double dailyMean = temperatureSimulator.getDailyMeanTemperature();
 
         double sum = 0;
         int numberOfSamples = 1000; // Simulate 1000 readings for the day
 
         for (int i = 0; i < numberOfSamples; i++) {
-            sum += dailyTemperatureSimulator.simulateTemperatureForMinute();
+            sum += temperatureSimulator.simulateTemperatureForMinute();
         }
 
         double averageTemperature = sum / numberOfSamples;
