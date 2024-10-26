@@ -1,13 +1,7 @@
 package it.vittoriomigliore.agriculturaldashboard.simulator.metric;
 
-import it.vittoriomigliore.agriculturaldashboard.core.entity.Cost;
-import it.vittoriomigliore.agriculturaldashboard.core.entity.Crop;
-import it.vittoriomigliore.agriculturaldashboard.core.entity.Field;
-import it.vittoriomigliore.agriculturaldashboard.core.entity.Irrigation;
-import it.vittoriomigliore.agriculturaldashboard.core.service.CostService;
-import it.vittoriomigliore.agriculturaldashboard.core.service.CropService;
-import it.vittoriomigliore.agriculturaldashboard.core.service.FieldService;
-import it.vittoriomigliore.agriculturaldashboard.core.service.IrrigationService;
+import it.vittoriomigliore.agriculturaldashboard.core.entity.*;
+import it.vittoriomigliore.agriculturaldashboard.core.service.*;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -22,22 +16,30 @@ public class MetricSimulatorService {
     private static final double COST_STD_DEV = 100.0;
     private static final double IRRIGATION_MEAN = 200.0;
     private static final double IRRIGATION_STD_DEV = 20.0;
+
     private final FieldService fieldService;
+    private final CostService costService;
+    private final CropService cropService;
+    private final IrrigationService irrigationService;
+    private final ProductionService productionService;
 
-    CostService costService;
-    CropService cropService;
-    CostSimulator costSimulator;
-    IrrigationService irrigationService;
-    IrrigationSimulator irrigationSimulator;
+    private final CostSimulator costSimulator;
+    private final IrrigationSimulator irrigationSimulator;
+    private final ProductionSimulator productionSimulator;
 
-    MetricSimulatorService(CostService costService, CropService cropService, FieldService fieldService, IrrigationService irrigationService,
-                           CostSimulator costSimulator, IrrigationSimulator irrigationSimulator) {
+    MetricSimulatorService(CostService costService, CropService cropService, FieldService fieldService,
+                           IrrigationService irrigationService, ProductionService productionService,
+                           CostSimulator costSimulator, IrrigationSimulator irrigationSimulator, ProductionSimulator productionSimulator) {
         this.costService = costService;
         this.cropService = cropService;
         this.fieldService = fieldService;
         this.irrigationService = irrigationService;
+        this.productionService = productionService;
+
         this.costSimulator = costSimulator;
         this.irrigationSimulator = irrigationSimulator;
+        this.productionSimulator = productionSimulator;
+
         initializeMetrics();
     }
 
@@ -53,8 +55,9 @@ public class MetricSimulatorService {
         crops.forEach((crop) -> {
             List<Field> fields = fieldService.getAllFieldsByCrop(crop);
             fields.forEach((field) -> {
-                    saveSimulatedCost(crop, field);
-                    saveSimulatedIrrigation(field);
+                saveSimulatedCost(crop, field);
+                saveSimulatedIrrigation(field);
+                saveSimulatedProduction(field, crop);
             });
         });
     }
@@ -80,5 +83,16 @@ public class MetricSimulatorService {
         irrigation.setAmountUsed(amount);
 
         irrigationService.saveIrrigation(irrigation);
+    }
+
+    private void saveSimulatedProduction(Field field, Crop crop) {
+        Production production = new Production();
+        production.setField(field);
+        production.setCrop(crop);
+
+        BigDecimal quantity = BigDecimal.valueOf(productionSimulator.simulateDailyProduction());
+        production.setQuantity(quantity);
+
+        productionService.saveProduction(production);
     }
 }
