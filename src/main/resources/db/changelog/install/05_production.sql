@@ -2,7 +2,7 @@
 --changeset vmigliore:202410230100
 CREATE TABLE production
 (
-    production_id  INT PRIMARY KEY,
+    production_id  INT AUTO_INCREMENT PRIMARY KEY,
     field_id       INT,
     crop_id        INT,
     harvest_date   DATE,

@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Table(name = "PRODUCTION")
 public class Production {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PRODUCTION_ID", nullable = false)
     private Integer id;
 
