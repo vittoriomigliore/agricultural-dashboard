@@ -16,29 +16,37 @@ public class MetricSimulatorService {
     private static final double COST_STD_DEV = 100.0;
     private static final double IRRIGATION_MEAN = 200.0;
     private static final double IRRIGATION_STD_DEV = 20.0;
+    private static final double PRODUCTION_AVG = 50.0;
+    private static final double SALES_RATE = 10.0;
 
     private final FieldService fieldService;
-    private final CostService costService;
     private final CropService cropService;
+
+    private final CostService costService;
     private final IrrigationService irrigationService;
     private final ProductionService productionService;
+    private final SaleService saleService;
 
     private final CostSimulator costSimulator;
     private final IrrigationSimulator irrigationSimulator;
     private final ProductionSimulator productionSimulator;
+    private final SalesSimulator salesSimulator;
 
-    MetricSimulatorService(CostService costService, CropService cropService, FieldService fieldService,
-                           IrrigationService irrigationService, ProductionService productionService,
-                           CostSimulator costSimulator, IrrigationSimulator irrigationSimulator, ProductionSimulator productionSimulator) {
-        this.costService = costService;
+    MetricSimulatorService(CropService cropService, FieldService fieldService,
+                           CostService costService, IrrigationService irrigationService, ProductionService productionService, SaleService saleService,
+                           CostSimulator costSimulator, IrrigationSimulator irrigationSimulator, ProductionSimulator productionSimulator, SalesSimulator salesSimulator) {
         this.cropService = cropService;
         this.fieldService = fieldService;
+
+        this.costService = costService;
         this.irrigationService = irrigationService;
         this.productionService = productionService;
+        this.saleService = saleService;
 
         this.costSimulator = costSimulator;
         this.irrigationSimulator = irrigationSimulator;
         this.productionSimulator = productionSimulator;
+        this.salesSimulator = salesSimulator;
 
         initializeMetrics();
     }
@@ -47,6 +55,8 @@ public class MetricSimulatorService {
     public void initializeMetrics() {
         costSimulator.init(COST_MEAN, COST_STD_DEV);
         irrigationSimulator.init(IRRIGATION_MEAN, IRRIGATION_STD_DEV);
+        productionSimulator.init(PRODUCTION_AVG);
+        salesSimulator.init(SALES_RATE);
     }
 
     @Scheduled(fixedRate = 3600000) // Runs every 2 hours
@@ -57,7 +67,8 @@ public class MetricSimulatorService {
             fields.forEach((field) -> {
                 saveSimulatedCost(crop, field);
                 saveSimulatedIrrigation(field);
-                saveSimulatedProduction(field, crop);
+                Production production = saveSimulatedProduction(field, crop);
+                saveSimulatedSale(production);
             });
         });
     }
@@ -85,7 +96,7 @@ public class MetricSimulatorService {
         irrigationService.saveIrrigation(irrigation);
     }
 
-    private void saveSimulatedProduction(Field field, Crop crop) {
+    private Production saveSimulatedProduction(Field field, Crop crop) {
         Production production = new Production();
         production.setField(field);
         production.setCrop(crop);
@@ -93,6 +104,17 @@ public class MetricSimulatorService {
         BigDecimal quantity = BigDecimal.valueOf(productionSimulator.simulateDailyProduction());
         production.setQuantity(quantity);
 
-        productionService.saveProduction(production);
+        return productionService.saveProduction(production);
+    }
+
+    private void saveSimulatedSale(Production production) {
+        Sale sale = new Sale();
+        sale.setProduction(production);
+        sale.setDate(LocalDate.now());
+
+        BigDecimal amount = BigDecimal.valueOf(salesSimulator.simulateDailySales());
+        sale.setSalePricePerUnit(amount);
+
+        saleService.saveProduction(sale);
     }
 }
