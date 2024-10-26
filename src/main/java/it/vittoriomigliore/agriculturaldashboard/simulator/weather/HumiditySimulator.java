@@ -1,7 +1,10 @@
 package it.vittoriomigliore.agriculturaldashboard.simulator.weather;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Random;
 
+@Component
 public class HumiditySimulator {
     private final Random random;
     // Humidity range (0 to 100%)

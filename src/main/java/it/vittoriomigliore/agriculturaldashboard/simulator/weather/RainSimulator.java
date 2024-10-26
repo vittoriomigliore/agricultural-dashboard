@@ -1,7 +1,10 @@
 package it.vittoriomigliore.agriculturaldashboard.simulator.weather;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Random;
 
+@Component
 public class RainSimulator {
     private double dailyRainProbability; // Probability of rain for the day
     private final Random random;

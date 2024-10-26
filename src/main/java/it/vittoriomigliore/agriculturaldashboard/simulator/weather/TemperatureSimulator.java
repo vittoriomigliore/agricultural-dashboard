@@ -1,7 +1,10 @@
 package it.vittoriomigliore.agriculturaldashboard.simulator.weather;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Random;
 
+@Component
 public class TemperatureSimulator {
     private double dailyMeanTemperature;
     private double dailyStandardDeviation;
