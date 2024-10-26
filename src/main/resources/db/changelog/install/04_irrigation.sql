@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset vmigliore:202410230100
+--changeset vmigliore:202410230100 runOnChange:true
 CREATE TABLE irrigation
 (
     irrigation_id INT AUTO_INCREMENT PRIMARY KEY,

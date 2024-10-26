@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset vmigliore:202410230100
+--changeset vmigliore:202410230100 runOnChange:true
 CREATE TABLE crop
 (
     crop_id          INT PRIMARY KEY,
