@@ -14,8 +14,8 @@ import java.util.List;
 @Service
 public class WeatherSimulatorService {
 
-    public static final double WIND_SPEED_SHAPE = 2.0;
-    public static final double WIND_SPEED_SCALE = 10.0;
+    private static final double WIND_SPEED_SHAPE = 2.0;
+    private static final double WIND_SPEED_SCALE = 10.0;
     private static final double HUMIDITY_ALPHA = 2.0;
     private static final double HUMIDITY_BETA = 5.0;
     private final FieldService fieldService;
