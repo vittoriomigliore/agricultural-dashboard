@@ -1,4 +1,4 @@
-package it.vittoriomigliore.agriculturaldashboard.controller;
+package it.vittoriomigliore.agriculturaldashboard.core.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

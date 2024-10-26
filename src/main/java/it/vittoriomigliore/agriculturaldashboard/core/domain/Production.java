@@ -1,4 +1,4 @@
-package it.vittoriomigliore.agriculturaldashboard.domain;
+package it.vittoriomigliore.agriculturaldashboard.core.domain;
 
 import jakarta.persistence.*;
 
