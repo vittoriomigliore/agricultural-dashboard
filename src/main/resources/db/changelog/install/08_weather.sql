@@ -2,7 +2,7 @@
 --changeset vmigliore:202410230100
 CREATE TABLE weather
 (
-    weather_id    INT PRIMARY KEY,
+    weather_id    INT AUTO_INCREMENT PRIMARY KEY,
     field_id      INT,
     date          DATE,
     temperature   DECIMAL(5, 2),
