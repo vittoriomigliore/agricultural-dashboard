@@ -1,12 +1,17 @@
-package it.vittoriomigliore.agriculturaldashboard.simulator;
+package it.vittoriomigliore.agriculturaldashboard.simulator.metric;
 
-import java.util.Random;
+import it.vittoriomigliore.agriculturaldashboard.simulator.SimulatorUtils;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SalesSimulator {
     private double dailySalesRate; // Average number of sales per day (λ)
 
     // Constructor
-    public SalesSimulator(double initialDailySalesRate) {
+    public SalesSimulator() {
+    }
+
+    public void init(double initialDailySalesRate) {
         this.dailySalesRate = initialDailySalesRate;
     }
 

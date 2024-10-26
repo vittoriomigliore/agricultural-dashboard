@@ -1,4 +1,4 @@
-package it.vittoriomigliore.agriculturaldashboard.simulator;
+package it.vittoriomigliore.agriculturaldashboard.simulator.metric;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -6,12 +6,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class IrrigationSimulatorTest {
 
+    public static final double MEAN = 200.0;
+    public static final double STD_DEV = 20.0;
     private IrrigationSimulator irrigationSimulator;
 
     @BeforeEach
     public void setUp() {
         // Setting an average daily irrigation of 200 liters per hectare with a standard deviation of 20
-        irrigationSimulator = new IrrigationSimulator(200.0, 20.0);
+        irrigationSimulator = new IrrigationSimulator();
+        irrigationSimulator.init(MEAN, STD_DEV);
     }
 
     // Test to verify the irrigation distribution is reasonable

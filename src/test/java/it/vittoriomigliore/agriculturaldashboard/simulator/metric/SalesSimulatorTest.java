@@ -1,4 +1,4 @@
-package it.vittoriomigliore.agriculturaldashboard.simulator;
+package it.vittoriomigliore.agriculturaldashboard.simulator.metric;
 
 
 import org.junit.jupiter.api.BeforeEach;
@@ -9,12 +9,14 @@ import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 public class SalesSimulatorTest {
 
+    public static final double INITIAL_RATE = 10.0;
     private SalesSimulator salesSimulator;
 
     @BeforeEach
     public void setUp() {
         // Setting an initial sales rate of 10 sales per day
-        salesSimulator = new SalesSimulator(10.0);
+        salesSimulator = new SalesSimulator();
+        salesSimulator.init(INITIAL_RATE);
     }
 
     // Test to check if daily sales are generated correctly

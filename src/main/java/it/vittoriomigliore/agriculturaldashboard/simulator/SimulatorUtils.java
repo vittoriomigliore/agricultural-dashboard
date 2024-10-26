@@ -3,7 +3,7 @@ package it.vittoriomigliore.agriculturaldashboard.simulator;
 import java.util.Random;
 
 public class SimulatorUtils {
-    static int poisson(double lambda) {
+    public static int poisson(double lambda) {
         double L = Math.exp(-lambda);
         int k = 0;
         double p = 1.0;

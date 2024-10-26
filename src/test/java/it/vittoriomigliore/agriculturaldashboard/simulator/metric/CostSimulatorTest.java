@@ -1,4 +1,4 @@
-package it.vittoriomigliore.agriculturaldashboard.simulator;
+package it.vittoriomigliore.agriculturaldashboard.simulator.metric;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -6,12 +6,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CostSimulatorTest {
 
+    public static final double MEAN = 1000.0;
+    public static final double STD_DEV = 100.0;
     private CostSimulator costSimulator;
 
     @BeforeEach
     public void setUp() {
         // Setting an average cost of 1000 with a standard deviation of 100
-        costSimulator = new CostSimulator(1000.0, 100.0);
+        costSimulator = new CostSimulator();
+        costSimulator.init(MEAN, STD_DEV);
     }
 
     // Test to verify the costs distribution is reasonable

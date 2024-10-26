@@ -1,4 +1,4 @@
-package it.vittoriomigliore.agriculturaldashboard.simulator;
+package it.vittoriomigliore.agriculturaldashboard.simulator.metric;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -6,12 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ProductionSimulatorTest {
 
+    public static final double AVG = 50.0;
     private ProductionSimulator productionSimulator;
 
     @BeforeEach
     public void setUp() {
         // Setting an average daily production of 50 units
-        productionSimulator = new ProductionSimulator(50.0);
+        productionSimulator = new ProductionSimulator();
+        productionSimulator.init(AVG);
     }
 
     // Test to verify the production distribution is reasonable
