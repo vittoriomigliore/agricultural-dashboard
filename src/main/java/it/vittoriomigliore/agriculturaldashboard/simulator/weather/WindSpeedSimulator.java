@@ -1,23 +1,21 @@
 package it.vittoriomigliore.agriculturaldashboard.simulator.weather;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Random;
 
+@Component
 public class WindSpeedSimulator {
     private final Random random;
-    private final double shape; // Weibull shape parameter (k)
-    private final double scale; // Weibull scale parameter (λ)
     private double dailyMeanWindSpeed;
 
     // Constructor
-    public WindSpeedSimulator(double shape, double scale) {
+    public WindSpeedSimulator() {
         this.random = new Random();
-        this.shape = shape;
-        this.scale = scale;
-        generateDailyMeanWindSpeed(); // Initialize with the first day's wind speed
     }
 
     // Generate daily mean wind speed using Weibull distribution
-    public void generateDailyMeanWindSpeed() {
+    public void generateDailyMeanWindSpeed(double shape, double scale) {
         this.dailyMeanWindSpeed = generateWeibullSample(shape, scale);
     }
 

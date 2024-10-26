@@ -8,18 +8,20 @@ import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 public class WindSpeedSimulatorTest {
 
+    public static final double SHAPE = 2.0;
+    public static final double SCALE = 10.0;
     private WindSpeedSimulator windSpeedSimulator;
 
     @BeforeEach
     public void setUp() {
         // Setting shape = 2 and scale = 10 to simulate typical wind speed conditions
-        windSpeedSimulator = new WindSpeedSimulator(2.0, 10.0);
+        windSpeedSimulator = new WindSpeedSimulator();
     }
 
     // Test to check if daily mean wind speed is generated correctly
     @Test
     public void testGenerateDailyMeanWindSpeed() {
-        windSpeedSimulator.generateDailyMeanWindSpeed();
+        windSpeedSimulator.generateDailyMeanWindSpeed(SHAPE, SCALE);
 
         double dailyMeanWindSpeed = windSpeedSimulator.getDailyMeanWindSpeed();
 
@@ -31,7 +33,7 @@ public class WindSpeedSimulatorTest {
     // Test to simulate wind speed for a given minute
     @Test
     public void testSimulateWindSpeedForMinute() {
-        windSpeedSimulator.generateDailyMeanWindSpeed();
+        windSpeedSimulator.generateDailyMeanWindSpeed(SHAPE, SCALE);
 
         for (int i = 0; i < 1000; i++) { // Simulate 1000 minutes
             double windSpeed = windSpeedSimulator.simulateWindSpeedForMinute();
@@ -43,7 +45,7 @@ public class WindSpeedSimulatorTest {
     // Test to verify wind speed fluctuations remain within a reasonable range
     @Test
     public void testWindSpeedFluctuations() {
-        windSpeedSimulator.generateDailyMeanWindSpeed();
+        windSpeedSimulator.generateDailyMeanWindSpeed(SHAPE, SCALE);
         double dailyMeanWindSpeed = windSpeedSimulator.getDailyMeanWindSpeed();
 
         for (int i = 0; i < 1000; i++) {
@@ -61,7 +63,7 @@ public class WindSpeedSimulatorTest {
         double sum = 0.0;
 
         for (int i = 0; i < samples; i++) {
-            windSpeedSimulator.generateDailyMeanWindSpeed();
+            windSpeedSimulator.generateDailyMeanWindSpeed(SHAPE, SCALE);
             sum += windSpeedSimulator.getDailyMeanWindSpeed();
         }
 
