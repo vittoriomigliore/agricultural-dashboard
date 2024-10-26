@@ -4,23 +4,18 @@ import java.util.Random;
 
 public class HumiditySimulator {
     private final Random random;
-    private final double alpha; // Shape parameter for the beta distribution
-    private final double beta;  // Shape parameter for the beta distribution
     // Humidity range (0 to 100%)
     private final double minHumidity = 0.0;
     private final double maxHumidity = 100.0;
     private double dailyMeanHumidity;
 
     // Constructor to initialize parameters for the beta distribution
-    public HumiditySimulator(double alpha, double beta) {
-        this.random = new Random();
-        this.alpha = alpha;
-        this.beta = beta;
-        generateDailyMeanHumidity(); // Initialize with the first day's humidity
+    public HumiditySimulator() {
+        this.random = new Random(); // Initialize with the first day's humidity
     }
 
     // Simulate daily mean humidity using Beta distribution
-    public void generateDailyMeanHumidity() {
+    public void generateDailyMeanHumidity(double alpha, double beta) {
         // Beta-distributed random number between 0 and 1
         double betaSample = generateBetaSample(alpha, beta);
         // Scale it to the humidity range [0, 100]

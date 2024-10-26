@@ -7,18 +7,20 @@ import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 public class HumiditySimulatorTest {
 
+    public static final double ALPHA = 2.0;
+    public static final double BETA = 5.0;
     private HumiditySimulator humiditySimulator;
 
     @BeforeEach
     public void setUp() {
         // Setting alpha = 2 and beta = 5 to simulate typical daily humidity profiles
-        humiditySimulator = new HumiditySimulator(2.0, 5.0);
+        humiditySimulator = new HumiditySimulator();
     }
 
     // Test to check if daily mean humidity is generated correctly
     @Test
     public void testGenerateDailyMeanHumidity() {
-        humiditySimulator.generateDailyMeanHumidity();
+        humiditySimulator.generateDailyMeanHumidity(ALPHA, BETA);
 
         double dailyMeanHumidity = humiditySimulator.getDailyMeanHumidity();
 
@@ -30,7 +32,7 @@ public class HumiditySimulatorTest {
     // Test to simulate humidity for a given minute
     @Test
     public void testSimulateHumidityForMinute() {
-        humiditySimulator.generateDailyMeanHumidity();
+        humiditySimulator.generateDailyMeanHumidity(ALPHA, BETA);
 
         for (int i = 0; i < 1000; i++) { // Simulate 1000 minutes
             double humidity = humiditySimulator.simulateHumidityForMinute();
@@ -43,7 +45,7 @@ public class HumiditySimulatorTest {
     // Test to verify humidity fluctuations remain within a reasonable range
     @Test
     public void testHumidityFluctuations() {
-        humiditySimulator.generateDailyMeanHumidity();
+        humiditySimulator.generateDailyMeanHumidity(ALPHA, BETA);
         double dailyMeanHumidity = humiditySimulator.getDailyMeanHumidity();
 
         for (int i = 0; i < 1000; i++) {
@@ -61,7 +63,7 @@ public class HumiditySimulatorTest {
         double sum = 0.0;
 
         for (int i = 0; i < samples; i++) {
-            humiditySimulator.generateDailyMeanHumidity();
+            humiditySimulator.generateDailyMeanHumidity(ALPHA, BETA);
             sum += humiditySimulator.getDailyMeanHumidity();
         }
 
