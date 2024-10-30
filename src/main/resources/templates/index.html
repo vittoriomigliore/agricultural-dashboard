@@ -1,26 +1,563 @@
 <!DOCTYPE html>
-<html lang="it">
-<head>
-    <title>My Project</title>
-    <meta charset="UTF-8">
-</head>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/header::header}"></head>
 <body>
-<h1>Welcome to My Project</h1>
-<p>This is a Spring Boot project with Thymeleaf.</p>
-<p>It's a simple project that demonstrates the use of Thymeleaf and Spring Boot.</p>
-<h2>Features</h2>
-<ul>
-    <li>Thymeleaf integration</li>
-    <li>Spring Boot integration</li>
-    <li>Simple project structure</li>
-</ul>
-<h2>Getting Started</h2>
-<p>To get started, follow these steps:</p>
-<ol>
-    <li>Clone the repository</li>
-    <li>Open the project in your preferred IDE</li>
-    <li>Run the project</li>
-</ol>
-<p>For more information, refer to the README.md file.</p>
+<div class="wrapper sidebar_minimize"> <!-- Sidebar -->
+    <div th:replace="~{fragments/sidebar::sidebar}"></div> <!-- Main Panel -->
+    <div class="main-panel">
+        <div th:replace="~{fragments/navbar::navbar}"></div> <!-- Content -->
+        <div class="container">
+            <div class="page-inner">
+                <div>
+                    <div class="row row-card-no-pd mt--2">
+                        <div class="col-12 col-sm-6 col-md-6 col-xl-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div><h5><b>Todays Income</b></h5>
+                                            <p class="text-muted">All Customs Value</p></div>
+                                        <h3 class="text-info fw-bold">$170</h3></div>
+                                    <div class="progress progress-sm">
+                                        <div class="progress-bar bg-info w-75" role="progressbar" aria-valuenow="75"
+                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-2"><p class="text-muted mb-0">
+                                        Change</p>
+                                        <p class="text-muted mb-0">75%</p></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-xl-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div><h5><b>Total Revenue</b></h5>
+                                            <p class="text-muted">All Customs Value</p></div>
+                                        <h3 class="text-success fw-bold">$120</h3></div>
+                                    <div class="progress progress-sm">
+                                        <div class="progress-bar bg-success w-25" role="progressbar" aria-valuenow="25"
+                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-2"><p class="text-muted mb-0">
+                                        Change</p>
+                                        <p class="text-muted mb-0">25%</p></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-xl-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div><h5><b>New Orders</b></h5>
+                                            <p class="text-muted">Fresh Order Amount</p></div>
+                                        <h3 class="text-danger fw-bold">15</h3></div>
+                                    <div class="progress progress-sm">
+                                        <div class="progress-bar bg-danger w-50" role="progressbar" aria-valuenow="50"
+                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-2"><p class="text-muted mb-0">
+                                        Change</p>
+                                        <p class="text-muted mb-0">50%</p></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-xl-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div><h5><b>New Users</b></h5>
+                                            <p class="text-muted">Joined New User</p></div>
+                                        <h3 class="text-secondary fw-bold">12</h3></div>
+                                    <div class="progress progress-sm">
+                                        <div class="progress-bar bg-secondary w-25" role="progressbar"
+                                             aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-2"><p class="text-muted mb-0">
+                                        Change</p>
+                                        <p class="text-muted mb-0">25%</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- Field 1 Section - Collapsible -->
+                    <div class="field-section mb-3">
+                        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+                            <div><h3 class="fw-bold mb-3">Field 1</h3> <h6 class="op-7 mb-2">Description</h6></div>
+                            <div class="ms-md-auto py-2 py-md-0"><a class="btn btn-primary btn-round"
+                                                                    data-bs-toggle="collapse" href="#collapseField1"
+                                                                    role="button" aria-expanded="false"
+                                                                    aria-controls="collapseField1"> Open/Close </a>
+                            </div>
+                        </div>
+                        <div class="collapse show" id="collapseField1"> <!-- Weather Section --> <h3>Weather</h3>
+                            <div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body"><h5 class="card-title">Temperature</h5>
+                                                <canvas id="tempChartField1"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body"><h5 class="card-title">Humidity</h5>
+                                                <canvas id="humidityChartField1"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body"><h5 class="card-title">Precipitation</h5>
+                                                <canvas id="precipitationChartField1"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body"><h5 class="card-title">Wind Speed</h5>
+                                                <canvas id="windSpeedChartField1"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- Metrics Section --> <h3>Metrics </h3>
+                            <div class="collapse show" id="metricsField1">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body"><h5 class="card-title">Irrigation Volume</h5>
+                                                <canvas id="irrigationChartField1"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body"><h5 class="card-title">Production Quantity</h5>
+                                                <canvas id="productionChartField1"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body"><h5 class="card-title">Sales</h5>
+                                                <canvas id="salesChartField1"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body"><h5 class="card-title">Costs</h5>
+                                                <canvas id="costsChartField1"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- Field 2 Section - Collapsible -->
+                    <div class="field-section mb-3">
+                        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+                            <div><h3 class="fw-bold mb-3">Field 2</h3> <h6 class="op-7 mb-2">Description</h6></div>
+                            <div class="ms-md-auto py-2 py-md-0"><a class="btn btn-primary btn-round"
+                                                                    data-bs-toggle="collapse" href="#collapseField2"
+                                                                    role="button" aria-expanded="false"
+                                                                    aria-controls="collapseField2"> Open/Close </a>
+                            </div>
+                        </div>
+                        <div class="collapse" id="collapseField2"> <!-- Weather Section --> <h3>Weather</h3>
+                            <div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body"><h5 class="card-title">Temperature</h5>
+                                                <canvas id="tempChartField2"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body"><h5 class="card-title">Humidity</h5>
+                                                <canvas id="humidityChartField2"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body"><h5 class="card-title">Precipitation</h5>
+                                                <canvas id="precipitationChartField2"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body"><h5 class="card-title">Wind Speed</h5>
+                                                <canvas id="windSpeedChartField2"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- Metrics Section --> <h3>Metrics </h3>
+                            <div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body"><h5 class="card-title">Irrigation Volume</h5>
+                                                <canvas id="irrigationChartField2"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body"><h5 class="card-title">Production Quantity</h5>
+                                                <canvas id="productionChartField2"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body"><h5 class="card-title">Sales</h5>
+                                                <canvas id="salesChartField2"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body"><h5 class="card-title">Costs</h5>
+                                                <canvas id="costsChartField2"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- Footer -->
+        <footer th:replace="~{fragments/footer :: footer}"></footer>
+    </div>
+</div>
+<!-- Core JS Files -->
+<script th:src="@{assets/js/core/jquery-3.7.1.min.js}"></script>
+<script th:src="@{assets/js/core/popper.min.js}"></script>
+<script th:src="@{assets/js/core/bootstrap.min.js}"></script> <!-- jQuery Scrollbar -->
+<script th:src="@{assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}"></script> <!-- Chart JS -->
+<script th:src="@{assets/js/plugin/chart.js/chart.min.js}"></script> <!-- jQuery Sparkline -->
+<script th:src="@{assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js}"></script> <!-- Chart Circle -->
+<script th:src="@{assets/js/plugin/chart-circle/circles.min.js}"></script> <!-- Datatables -->
+<script th:src="@{assets/js/plugin/datatables/datatables.min.js}"></script> <!-- Bootstrap Notify -->
+<script th:src="@{assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js}"></script> <!-- jQuery Vector Maps -->
+<script th:src="@{assets/js/plugin/jsvectormap/jsvectormap.min.js}"></script>
+<script th:src="@{assets/js/plugin/jsvectormap/world.js}"></script> <!-- Sweet Alert -->
+<script th:src="@{assets/js/plugin/sweetalert/sweetalert.min.js}"></script> <!-- Kaiadmin JS -->
+<script th:src="@{assets/js/kaiadmin.min.js}"></script>
+<script>
+    const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    // Field 1 Charts
+    new Chart(document.getElementById('tempChartField1'), {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Temperature (°C)',
+                data: [5, 6, 9, 15, 20, 25, 30, 29, 24, 18, 12, 7],
+                borderColor: 'rgba(75, 192, 192, 1)',
+                fill: false
+            }]
+        }
+    });
+    new Chart(document.getElementById('humidityChartField1'), {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Humidity (%)',
+                data: [85, 82, 78, 75, 70, 65, 60, 62, 68, 75, 80, 83],
+                borderColor: 'rgba(54, 162, 235, 1)',
+                fill: false
+            }]
+        }
+    });
+    new Chart(document.getElementById('precipitationChartField1'), {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Precipitation (mm)',
+                data: [80, 60, 40, 20, 10, 5, 2, 3, 10, 30, 50, 70],
+                backgroundColor: 'rgba(153, 102, 255, 0.6)'
+            }]
+        }
+    });
+    new Chart(document.getElementById('windSpeedChartField1'), {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Wind Speed (km/h)',
+                data: [15, 16, 18, 10, 8, 5, 7, 6, 10, 12, 14, 16],
+                borderColor: 'rgba(255, 206, 86, 1)',
+                fill: false
+            }]
+        }
+    });
+    new Chart(document.getElementById('irrigationChartField1'), {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Irrigation Volume (L)',
+                data: [100, 90, 80, 70, 50, 30, 20, 25, 45, 70, 85, 95],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                fill: true
+            }]
+        }
+    });
+    new Chart(document.getElementById('productionChartField1'), {
+        type: 'bar',
+        data: {
+            labels: ['January', 'February', 'March'], // Months or other time intervals
+            datasets: [
+                {
+                    label: 'Wheat',
+                    data: [300, 280, 350],
+                    backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                },
+                {
+                    label: 'Corn',
+                    data: [150, 200, 170],
+                    backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                },
+                {
+                    label: 'Tomato',
+                    data: [220, 210, 260],
+                    backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                },
+                {
+                    label: 'Potato',
+                    data: [100, 120, 90],
+                    backgroundColor: 'rgba(255, 206, 86, 0.8)',
+                },
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+            },
+            scales: {
+                x: {
+                    stacked: true,
+                },
+                y: {
+                    stacked: true,
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Production Quantity (tons)',
+                    },
+                },
+            },
+        }
+    });
+    new Chart(document.getElementById('salesChartField1'), {
+        type: 'bar',
+        data: {
+            labels: ['January', 'February', 'March', 'April'], // Time periods
+            datasets: [
+                {
+                    label: 'Production Quantity',
+                    data: [500, 600, 550, 700], // Production data per period
+                    type: 'bar',
+                    backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                },
+                {
+                    label: 'Sales Quantity',
+                    data: [450, 580, 520, 680], // Sales data per period
+                    type: 'line',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    tension: 0.3,
+                },
+            ],
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Production vs. Sales Over Time',
+                },
+            }
+        }
+    });
+    new Chart(document.getElementById('costsChartField1'), {
+        type: 'line',
+        data: {
+            labels: ['January', 'February', 'March', 'April'], // Time intervals (e.g., months or weeks)
+            datasets: [
+                {
+                    label: 'Wheat',
+                    data: [1200, 1300, 1250, 1400], // Costs for each time period
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    tension: 0.3, // Optional: curve line for smoother look
+                },
+                {
+                    label: 'Corn',
+                    data: [900, 850, 800, 950],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    tension: 0.3,
+                },
+                {
+                    label: 'Tomato',
+                    data: [1100, 1150, 1200, 1180],
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    tension: 0.3,
+                },
+                {
+                    label: 'Potato',
+                    data: [700, 750, 720, 780],
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                    tension: 0.3,
+                },
+            ],
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Cost Trends per Crop',
+                },
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Cost (Currency)',
+                    },
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Time Period',
+                    },
+                },
+            },
+        }
+    });
+
+    // Field 2 Charts
+    new Chart(document.getElementById('tempChartField2'), {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Temperature (°C)',
+                data: [5, 6, 9, 15, 20, 25, 30, 29, 24, 18, 12, 7],
+                borderColor: 'rgba(75, 192, 192, 1)',
+                fill: false
+            }]
+        }
+    });
+    new Chart(document.getElementById('humidityChartField2'), {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Humidity (%)',
+                data: [85, 82, 78, 75, 70, 65, 60, 62, 68, 75, 80, 83],
+                borderColor: 'rgba(54, 162, 235, 1)',
+                fill: false
+            }]
+        }
+    });
+    new Chart(document.getElementById('precipitationChartField2'), {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Precipitation (mm)',
+                data: [80, 60, 40, 20, 10, 5, 2, 3, 10, 30, 50, 70],
+                backgroundColor: 'rgba(153, 102, 255, 0.6)'
+            }]
+        }
+    });
+    new Chart(document.getElementById('windSpeedChartField2'), {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Wind Speed (km/h)',
+                data: [15, 16, 18, 10, 8, 5, 7, 6, 10, 12, 14, 16],
+                borderColor: 'rgba(255, 206, 86, 1)',
+                fill: false
+            }]
+        }
+    });
+    new Chart(document.getElementById('irrigationChartField2'), {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Irrigation Volume (L)',
+                data: [100, 90, 80, 70, 50, 30, 20, 25, 45, 70, 85, 95],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                fill: true
+            }]
+        }
+    });
+    new Chart(document.getElementById('productionChartField2'), {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Production Quantity (tons)',
+                data: [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 4, 3.5, 2.5, 1.5],
+                backgroundColor: 'rgba(54, 162, 235, 0.6)'
+            }]
+        }
+    });
+    new Chart(document.getElementById('salesChartField2'), {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Sales (units)',
+                data: [100, 120, 150, 200, 250, 300, 350, 320, 280, 200, 180, 160],
+                borderColor: 'rgba(255, 99, 132, 1)',
+                fill: false
+            }]
+        }
+    });
+    new Chart(document.getElementById('costsChartField2'), {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Costs ($)',
+                data: [500, 480, 450, 400, 350, 300, 280, 290, 320, 360, 400, 420],
+                borderColor: 'rgba(255, 159, 64, 1)',
+                fill: false
+            }]
+        }
+    });
+</script>
 </body>
 </html>
