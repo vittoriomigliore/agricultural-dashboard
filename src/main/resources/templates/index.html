@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="~{fragments/header::header}"></head>
 <body>
-<div class="wrapper sidebar_minimize"> <!-- Sidebar -->
-    <div th:replace="~{fragments/sidebar::sidebar}"></div> <!-- Main Panel -->
+<div class="wrapper sidebar_minimize">
+    <div th:replace="~{fragments/sidebar::sidebar}"></div>
     <div class="main-panel">
-        <div th:replace="~{fragments/navbar::navbar}"></div> <!-- Content -->
+        <div th:replace="~{fragments/navbar::navbar}"></div>
         <div class="container">
             <div class="page-inner">
                 <div>
@@ -78,164 +78,16 @@
                                 </div>
                             </div>
                         </div>
-                    </div> <!-- Field 1 Section - Collapsible -->
-                    <div class="field-section mb-3">
-                        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
-                            <div><h3 class="fw-bold mb-3">Field 1</h3> <h6 class="op-7 mb-2">Description</h6></div>
-                            <div class="ms-md-auto py-2 py-md-0"><a class="btn btn-primary btn-round"
-                                                                    data-bs-toggle="collapse" href="#collapseField1"
-                                                                    role="button" aria-expanded="false"
-                                                                    aria-controls="collapseField1"> Open/Close </a>
-                            </div>
-                        </div>
-                        <div class="collapse show" id="collapseField1"> <!-- Weather Section --> <h3>Weather</h3>
-                            <div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-body"><h5 class="card-title">Temperature</h5>
-                                                <canvas id="tempChartField1"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-body"><h5 class="card-title">Humidity</h5>
-                                                <canvas id="humidityChartField1"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-body"><h5 class="card-title">Precipitation</h5>
-                                                <canvas id="precipitationChartField1"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-body"><h5 class="card-title">Wind Speed</h5>
-                                                <canvas id="windSpeedChartField1"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> <!-- Metrics Section --> <h3>Metrics </h3>
-                            <div class="collapse show" id="metricsField1">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-body"><h5 class="card-title">Irrigation Volume</h5>
-                                                <canvas id="irrigationChartField1"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-body"><h5 class="card-title">Production Quantity</h5>
-                                                <canvas id="productionChartField1"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-body"><h5 class="card-title">Sales</h5>
-                                                <canvas id="salesChartField1"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-body"><h5 class="card-title">Costs</h5>
-                                                <canvas id="costsChartField1"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- Field 2 Section - Collapsible -->
-                    <div class="field-section mb-3">
-                        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
-                            <div><h3 class="fw-bold mb-3">Field 2</h3> <h6 class="op-7 mb-2">Description</h6></div>
-                            <div class="ms-md-auto py-2 py-md-0"><a class="btn btn-primary btn-round"
-                                                                    data-bs-toggle="collapse" href="#collapseField2"
-                                                                    role="button" aria-expanded="false"
-                                                                    aria-controls="collapseField2"> Open/Close </a>
-                            </div>
-                        </div>
-                        <div class="collapse" id="collapseField2"> <!-- Weather Section --> <h3>Weather</h3>
-                            <div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-body"><h5 class="card-title">Temperature</h5>
-                                                <canvas id="tempChartField2"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-body"><h5 class="card-title">Humidity</h5>
-                                                <canvas id="humidityChartField2"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-body"><h5 class="card-title">Precipitation</h5>
-                                                <canvas id="precipitationChartField2"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-body"><h5 class="card-title">Wind Speed</h5>
-                                                <canvas id="windSpeedChartField2"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> <!-- Metrics Section --> <h3>Metrics </h3>
-                            <div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-body"><h5 class="card-title">Irrigation Volume</h5>
-                                                <canvas id="irrigationChartField2"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-body"><h5 class="card-title">Production Quantity</h5>
-                                                <canvas id="productionChartField2"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-body"><h5 class="card-title">Sales</h5>
-                                                <canvas id="salesChartField2"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-body"><h5 class="card-title">Costs</h5>
-                                                <canvas id="costsChartField2"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
+                    <th:block th:each="field,iterationStat : ${fields}">
+                        <div th:replace="~{fragments/field::field(${field},${iterationStat.index})}"></div>
+                    </th:block>
                 </div>
             </div>
-        </div> <!-- Footer -->
-        <footer th:replace="~{fragments/footer :: footer}"></footer>
+        </div>
     </div>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
 </div>
 <!-- Core JS Files -->
 <script th:src="@{assets/js/core/jquery-3.7.1.min.js}"></script>
