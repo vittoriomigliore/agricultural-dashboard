@@ -106,310 +106,225 @@
 <script>
     const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-    // Field 1 Charts
-    new Chart(document.getElementById('tempChartField1'), {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Temperature (°C)',
-                data: [5, 6, 9, 15, 20, 25, 30, 29, 24, 18, 12, 7],
-                borderColor: 'rgba(75, 192, 192, 1)',
-                fill: false
-            }]
-        }
-    });
-    new Chart(document.getElementById('humidityChartField1'), {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Humidity (%)',
-                data: [85, 82, 78, 75, 70, 65, 60, 62, 68, 75, 80, 83],
-                borderColor: 'rgba(54, 162, 235, 1)',
-                fill: false
-            }]
-        }
-    });
-    new Chart(document.getElementById('precipitationChartField1'), {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Precipitation (mm)',
-                data: [80, 60, 40, 20, 10, 5, 2, 3, 10, 30, 50, 70],
-                backgroundColor: 'rgba(153, 102, 255, 0.6)'
-            }]
-        }
-    });
-    new Chart(document.getElementById('windSpeedChartField1'), {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Wind Speed (km/h)',
-                data: [15, 16, 18, 10, 8, 5, 7, 6, 10, 12, 14, 16],
-                borderColor: 'rgba(255, 206, 86, 1)',
-                fill: false
-            }]
-        }
-    });
-    new Chart(document.getElementById('irrigationChartField1'), {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Irrigation Volume (L)',
-                data: [100, 90, 80, 70, 50, 30, 20, 25, 45, 70, 85, 95],
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                fill: true
-            }]
-        }
-    });
-    new Chart(document.getElementById('productionChartField1'), {
-        type: 'bar',
-        data: {
-            labels: ['January', 'February', 'March'], // Months or other time intervals
-            datasets: [
-                {
-                    label: 'Wheat',
-                    data: [300, 280, 350],
-                    backgroundColor: 'rgba(54, 162, 235, 0.8)',
-                },
-                {
-                    label: 'Corn',
-                    data: [150, 200, 170],
-                    backgroundColor: 'rgba(75, 192, 192, 0.8)',
-                },
-                {
-                    label: 'Tomato',
-                    data: [220, 210, 260],
-                    backgroundColor: 'rgba(255, 99, 132, 0.8)',
-                },
-                {
-                    label: 'Potato',
-                    data: [100, 120, 90],
-                    backgroundColor: 'rgba(255, 206, 86, 0.8)',
-                },
-            ]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
+    var fields = [[${fields.size()}]];
+    for (var i = 0; i < fields; i++) {
+        var idFieldHtml = "field" + i;
+        var temperatureId = 'temperature-' + idFieldHtml
+        var humidityId = 'humidity-' + idFieldHtml
+        var precipitationId = 'precipitation-' + idFieldHtml
+        var windSpeedId = 'windSpeed-' + idFieldHtml
+        var irrigationId = 'irrigation-' + idFieldHtml
+        var productionId = 'production-' + idFieldHtml
+        var salesId = 'sales-' + idFieldHtml
+        var costsId = 'costs-' + idFieldHtml
+        console.log(temperatureId)
+        new Chart(document.getElementById(temperatureId), {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Temperature (°C)',
+                    data: [5, 6, 9, 15, 20, 25, 30, 29, 24, 18, 12, 7],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    fill: false
+                }]
+            }
+        });
+        new Chart(document.getElementById(humidityId), {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Humidity (%)',
+                    data: [85, 82, 78, 75, 70, 65, 60, 62, 68, 75, 80, 83],
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    fill: false
+                }]
+            }
+        });
+        new Chart(document.getElementById(precipitationId), {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Precipitation (mm)',
+                    data: [80, 60, 40, 20, 10, 5, 2, 3, 10, 30, 50, 70],
+                    backgroundColor: 'rgba(153, 102, 255, 0.6)'
+                }]
+            }
+        });
+        new Chart(document.getElementById(windSpeedId), {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Wind Speed (km/h)',
+                    data: [15, 16, 18, 10, 8, 5, 7, 6, 10, 12, 14, 16],
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    fill: false
+                }]
+            }
+        });
+        new Chart(document.getElementById(irrigationId), {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Irrigation Volume (L)',
+                    data: [100, 90, 80, 70, 50, 30, 20, 25, 45, 70, 85, 95],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    fill: true
+                }]
+            }
+        });
+        new Chart(document.getElementById(productionId), {
+            type: 'bar',
+            data: {
+                labels: ['January', 'February', 'March'], // Months or other time intervals
+                datasets: [
+                    {
+                        label: 'Wheat',
+                        data: [300, 280, 350],
+                        backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                    },
+                    {
+                        label: 'Corn',
+                        data: [150, 200, 170],
+                        backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                    },
+                    {
+                        label: 'Tomato',
+                        data: [220, 210, 260],
+                        backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                    },
+                    {
+                        label: 'Potato',
+                        data: [100, 120, 90],
+                        backgroundColor: 'rgba(255, 206, 86, 0.8)',
+                    },
+                ]
             },
-            scales: {
-                x: {
-                    stacked: true,
-                },
-                y: {
-                    stacked: true,
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Production Quantity (tons)',
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
                     },
                 },
-            },
-        }
-    });
-    new Chart(document.getElementById('salesChartField1'), {
-        type: 'bar',
-        data: {
-            labels: ['January', 'February', 'March', 'April'], // Time periods
-            datasets: [
-                {
-                    label: 'Production Quantity',
-                    data: [500, 600, 550, 700], // Production data per period
-                    type: 'bar',
-                    backgroundColor: 'rgba(75, 192, 192, 0.8)',
-                },
-                {
-                    label: 'Sales Quantity',
-                    data: [450, 580, 520, 680], // Sales data per period
-                    type: 'line',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    tension: 0.3,
-                },
-            ],
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
-                title: {
-                    display: true,
-                    text: 'Production vs. Sales Over Time',
+                scales: {
+                    x: {
+                        stacked: true,
+                    },
+                    y: {
+                        stacked: true,
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Production Quantity (tons)',
+                        },
+                    },
                 },
             }
-        }
-    });
-    new Chart(document.getElementById('costsChartField1'), {
-        type: 'line',
-        data: {
-            labels: ['January', 'February', 'March', 'April'], // Time intervals (e.g., months or weeks)
-            datasets: [
-                {
-                    label: 'Wheat',
-                    data: [1200, 1300, 1250, 1400], // Costs for each time period
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    tension: 0.3, // Optional: curve line for smoother look
-                },
-                {
-                    label: 'Corn',
-                    data: [900, 850, 800, 950],
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    tension: 0.3,
-                },
-                {
-                    label: 'Tomato',
-                    data: [1100, 1150, 1200, 1180],
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    tension: 0.3,
-                },
-                {
-                    label: 'Potato',
-                    data: [700, 750, 720, 780],
-                    borderColor: 'rgba(255, 206, 86, 1)',
-                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
-                    tension: 0.3,
-                },
-            ],
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
-                title: {
-                    display: true,
-                    text: 'Cost Trends per Crop',
-                },
+        });
+        new Chart(document.getElementById(salesId), {
+            type: 'bar',
+            data: {
+                labels: ['January', 'February', 'March', 'April'], // Time periods
+                datasets: [
+                    {
+                        label: 'Production Quantity',
+                        data: [500, 600, 550, 700], // Production data per period
+                        type: 'bar',
+                        backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                    },
+                    {
+                        label: 'Sales Quantity',
+                        data: [450, 580, 520, 680], // Sales data per period
+                        type: 'line',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        tension: 0.3,
+                    },
+                ],
             },
-            scales: {
-                y: {
-                    beginAtZero: true,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
                     title: {
                         display: true,
-                        text: 'Cost (Currency)',
+                        text: 'Production vs. Sales Over Time',
                     },
-                },
-                x: {
+                }
+            }
+        });
+        new Chart(document.getElementById(costsId), {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April'], // Time intervals (e.g., months or weeks)
+                datasets: [
+                    {
+                        label: 'Wheat',
+                        data: [1200, 1300, 1250, 1400], // Costs for each time period
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        tension: 0.3, // Optional: curve line for smoother look
+                    },
+                    {
+                        label: 'Corn',
+                        data: [900, 850, 800, 950],
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        tension: 0.3,
+                    },
+                    {
+                        label: 'Tomato',
+                        data: [1100, 1150, 1200, 1180],
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        tension: 0.3,
+                    },
+                    {
+                        label: 'Potato',
+                        data: [700, 750, 720, 780],
+                        borderColor: 'rgba(255, 206, 86, 1)',
+                        backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                        tension: 0.3,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
                     title: {
                         display: true,
-                        text: 'Time Period',
+                        text: 'Cost Trends per Crop',
                     },
                 },
-            },
-        }
-    });
-
-    // Field 2 Charts
-    new Chart(document.getElementById('tempChartField2'), {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Temperature (°C)',
-                data: [5, 6, 9, 15, 20, 25, 30, 29, 24, 18, 12, 7],
-                borderColor: 'rgba(75, 192, 192, 1)',
-                fill: false
-            }]
-        }
-    });
-    new Chart(document.getElementById('humidityChartField2'), {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Humidity (%)',
-                data: [85, 82, 78, 75, 70, 65, 60, 62, 68, 75, 80, 83],
-                borderColor: 'rgba(54, 162, 235, 1)',
-                fill: false
-            }]
-        }
-    });
-    new Chart(document.getElementById('precipitationChartField2'), {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Precipitation (mm)',
-                data: [80, 60, 40, 20, 10, 5, 2, 3, 10, 30, 50, 70],
-                backgroundColor: 'rgba(153, 102, 255, 0.6)'
-            }]
-        }
-    });
-    new Chart(document.getElementById('windSpeedChartField2'), {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Wind Speed (km/h)',
-                data: [15, 16, 18, 10, 8, 5, 7, 6, 10, 12, 14, 16],
-                borderColor: 'rgba(255, 206, 86, 1)',
-                fill: false
-            }]
-        }
-    });
-    new Chart(document.getElementById('irrigationChartField2'), {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Irrigation Volume (L)',
-                data: [100, 90, 80, 70, 50, 30, 20, 25, 45, 70, 85, 95],
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                fill: true
-            }]
-        }
-    });
-    new Chart(document.getElementById('productionChartField2'), {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Production Quantity (tons)',
-                data: [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 4, 3.5, 2.5, 1.5],
-                backgroundColor: 'rgba(54, 162, 235, 0.6)'
-            }]
-        }
-    });
-    new Chart(document.getElementById('salesChartField2'), {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Sales (units)',
-                data: [100, 120, 150, 200, 250, 300, 350, 320, 280, 200, 180, 160],
-                borderColor: 'rgba(255, 99, 132, 1)',
-                fill: false
-            }]
-        }
-    });
-    new Chart(document.getElementById('costsChartField2'), {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Costs ($)',
-                data: [500, 480, 450, 400, 350, 300, 280, 290, 320, 360, 400, 420],
-                borderColor: 'rgba(255, 159, 64, 1)',
-                fill: false
-            }]
-        }
-    });
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Cost (Currency)',
+                        },
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Time Period',
+                        },
+                    },
+                },
+            }
+        });
+    }
 </script>
 </body>
 </html>
