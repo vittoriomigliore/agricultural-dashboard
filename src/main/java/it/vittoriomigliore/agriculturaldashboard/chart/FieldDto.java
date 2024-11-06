@@ -2,7 +2,6 @@ package it.vittoriomigliore.agriculturaldashboard.chart;
 
 import it.vittoriomigliore.agriculturaldashboard.core.entity.Field;
 import it.vittoriomigliore.agriculturaldashboard.core.entity.Weather;
-import it.vittoriomigliore.agriculturaldashboard.core.util.EChartType;
 
 import java.util.HashMap;
 import java.util.List;

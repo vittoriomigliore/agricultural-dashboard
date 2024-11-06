@@ -1,7 +1,5 @@
 package it.vittoriomigliore.agriculturaldashboard.chart;
 
-import it.vittoriomigliore.agriculturaldashboard.core.util.EChartType;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
