@@ -21,7 +21,7 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 @Component
-public class ChartWebSocketHandler extends TextWebSocketHandler {
+public class ChartLiveDataHandler extends TextWebSocketHandler {
 
     private final FieldService fieldService;
     private final WeatherService weatherService;
@@ -29,7 +29,7 @@ public class ChartWebSocketHandler extends TextWebSocketHandler {
     private final Set<WebSocketSession> sessions = new CopyOnWriteArraySet<>();
 
     @Autowired
-    public ChartWebSocketHandler(FieldService fieldService, WeatherService weatherService, ObjectMapper objectMapper) {
+    public ChartLiveDataHandler(FieldService fieldService, WeatherService weatherService, ObjectMapper objectMapper) {
         this.fieldService = fieldService;
         this.weatherService = weatherService;
         this.objectMapper = objectMapper;
