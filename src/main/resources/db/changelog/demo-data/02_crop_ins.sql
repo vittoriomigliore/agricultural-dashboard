@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset vmigliore:202410230100
+--changeset vmigliore:02_crop_ins runOnChange:true
 INSERT INTO crop (crop_id, name, type, season, growth_time, ideal_conditions)
 VALUES (1, 'Wheat', 'Cereal', 'Autumn-Summer', 220, 'Well-drained soil, temperate climate'),
        (2, 'Corn', 'Cereal', 'Spring-Summer', 120, 'Deep fertile soil, sufficient irrigation'),
