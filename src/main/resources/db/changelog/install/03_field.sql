@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset vmigliore:202410230100 runOnChange:true
+--changeset vmigliore:03_field runOnChange:true
 CREATE TABLE field
 (
     field_id             INT PRIMARY KEY,

@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset vmigliore:202410230100 runOnChange:true
+--changeset vmigliore:05_production runOnChange:true
 CREATE TABLE production
 (
     production_id  INT AUTO_INCREMENT PRIMARY KEY,

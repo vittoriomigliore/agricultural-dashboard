@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset vmigliore:202410230100 runOnChange:true
+--changeset vmigliore:06_costs runOnChange:true
 CREATE TABLE costs
 (
     cost_id   INT AUTO_INCREMENT PRIMARY KEY,

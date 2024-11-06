@@ -1,10 +1,10 @@
 --liquibase formatted sql
---changeset vmigliore:202410230100 runOnChange:true
+--changeset vmigliore:08_weather runOnChange:true
 CREATE TABLE weather
 (
     weather_id    INT AUTO_INCREMENT PRIMARY KEY,
     field_id      INT,
-    date          DATE,
+    datetime      DATETIME,
     temperature   DECIMAL(5, 2),
     precipitation DECIMAL(5, 2),
     humidity      DECIMAL(5, 2),

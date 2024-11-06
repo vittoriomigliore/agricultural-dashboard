@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset vmigliore:202410230100 runOnChange:true
+--changeset vmigliore:01_company runOnChange:true
 CREATE TABLE company
 (
     company_id       INT PRIMARY KEY,
