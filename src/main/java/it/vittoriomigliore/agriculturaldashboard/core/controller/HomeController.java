@@ -27,5 +27,6 @@ public class HomeController {
     public void addFields(Model model) {
         List<Field> fields = fieldService.getAllFields();
         model.addAttribute("fields", fields);
+        model.addAttribute("fieldIdList", fields.stream().map(Field::getId).toList());
     }
 }
