@@ -1,6 +1,6 @@
 --liquibase formatted sql
 --changeset vmigliore:03_field runOnChange:true
-CREATE TABLE field
+CREATE TABLE IF NOT EXISTS field
 (
     field_id             INT PRIMARY KEY,
     company_id           INT,

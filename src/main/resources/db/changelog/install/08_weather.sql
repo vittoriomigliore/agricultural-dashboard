@@ -1,6 +1,6 @@
 --liquibase formatted sql
 --changeset vmigliore:08_weather runOnChange:true
-CREATE TABLE weather
+CREATE TABLE IF NOT EXISTS weather
 (
     weather_id    INT AUTO_INCREMENT PRIMARY KEY,
     field_id      INT,

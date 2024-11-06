@@ -1,6 +1,6 @@
 --liquibase formatted sql
 --changeset vmigliore:06_costs runOnChange:true
-CREATE TABLE costs
+CREATE TABLE IF NOT EXISTS costs
 (
     cost_id   INT AUTO_INCREMENT PRIMARY KEY,
     field_id  INT,

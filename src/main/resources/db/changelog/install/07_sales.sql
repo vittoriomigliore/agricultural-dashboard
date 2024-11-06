@@ -1,6 +1,6 @@
 --liquibase formatted sql
 --changeset vmigliore:07_sales runOnChange:true
-CREATE TABLE sales
+CREATE TABLE IF NOT EXISTS sales
 (
     sale_id             INT AUTO_INCREMENT PRIMARY KEY,
     production_id       INT,
