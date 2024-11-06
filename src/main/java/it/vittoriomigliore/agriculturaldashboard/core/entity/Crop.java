@@ -1,9 +1,7 @@
 package it.vittoriomigliore.agriculturaldashboard.core.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import it.vittoriomigliore.agriculturaldashboard.core.util.ECropType;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "CROP")
@@ -15,17 +13,9 @@ public class Crop {
     @Column(name = "NAME")
     private String name;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "TYPE")
-    private String type;
-
-    @Column(name = "SEASON")
-    private String season;
-
-    @Column(name = "GROWTH_TIME")
-    private Integer growthTime;
-
-    @Column(name = "IDEAL_CONDITIONS")
-    private String idealConditions;
+    private ECropType type;
 
     public Integer getId() {
         return id;
@@ -43,36 +33,12 @@ public class Crop {
         this.name = name;
     }
 
-    public String getType() {
+    public ECropType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(ECropType type) {
         this.type = type;
-    }
-
-    public String getSeason() {
-        return season;
-    }
-
-    public void setSeason(String season) {
-        this.season = season;
-    }
-
-    public Integer getGrowthTime() {
-        return growthTime;
-    }
-
-    public void setGrowthTime(Integer growthTime) {
-        this.growthTime = growthTime;
-    }
-
-    public String getIdealConditions() {
-        return idealConditions;
-    }
-
-    public void setIdealConditions(String idealConditions) {
-        this.idealConditions = idealConditions;
     }
 
 }
