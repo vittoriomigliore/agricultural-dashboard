@@ -75,7 +75,7 @@ public class ChartWebSocketHandler extends TextWebSocketHandler {
         for (Field field : fields) {
             FieldDto fieldDto = new FieldDto(field);
 
-            List<Weather> weatherList = weatherService.getLastWeekWeatherByField(field);
+            List<Weather> weatherList = weatherService.getLastFiveMinutesWeatherByField(field);
             weatherList.forEach((fieldDto::addWeather));
 
             fieldDtoList.add(fieldDto);

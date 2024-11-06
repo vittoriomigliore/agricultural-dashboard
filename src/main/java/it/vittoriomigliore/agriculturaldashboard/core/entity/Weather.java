@@ -5,7 +5,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "WEATHER")
@@ -20,8 +20,8 @@ public class Weather {
     @JoinColumn(name = "FIELD_ID")
     private Field field;
 
-    @Column(name = "DATE")
-    private LocalDate date;
+    @Column(name = "DATETIME")
+    private LocalDateTime dateTime;
 
     @Column(name = "TEMPERATURE", precision = 5, scale = 2)
     private BigDecimal temperature;
@@ -51,12 +51,12 @@ public class Weather {
         this.field = field;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setDateTime(LocalDateTime date) {
+        this.dateTime = date;
     }
 
     public BigDecimal getTemperature() {

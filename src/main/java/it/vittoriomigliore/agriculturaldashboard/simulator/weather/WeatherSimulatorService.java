@@ -8,7 +8,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -43,7 +43,7 @@ public class WeatherSimulatorService {
         windSpeedSimulator.generateDailyMeanWindSpeed(WIND_SPEED_SHAPE, WIND_SPEED_SCALE);
     }
 
-    @Scheduled(fixedRate = 120000) // Every 2 minutes
+    @Scheduled(fixedRateString = "${simulator.weather.rate}")
     public void simulateWeather() {
         List<Field> fields = fieldService.getAllFields();
 
@@ -53,7 +53,7 @@ public class WeatherSimulatorService {
     private void saveSimulatedWeather(Field field) {
         Weather weather = new Weather();
         weather.setField(field);
-        weather.setDate(LocalDate.now());
+        weather.setDateTime(LocalDateTime.now());
 
         BigDecimal humidity = BigDecimal.valueOf(humiditySimulator.getDailyMeanHumidity());
         BigDecimal precipitation = BigDecimal.valueOf(rainSimulator.simulatePrecipitationPerMinute());
