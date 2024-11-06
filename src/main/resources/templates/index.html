@@ -105,10 +105,9 @@
 <script th:src="@{assets/js/kaiadmin.min.js}"></script>
 <script th:inline="javascript">
     const fieldIdList = [[${fieldIdList}]]
-    const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-    const fieldObjectList = fieldIdList.map((fieldId) => {
-        const idHtml = "field" + 0
+    const fieldObjectList = fieldIdList.map((fieldId, index) => {
+        const idHtml = "field" + index
         return {
             id: fieldId,
             idHtml: idHtml,
