@@ -177,7 +177,16 @@
             }
         }
     })
-    const socket = new WebSocket('ws://localhost:8181/data-simulator')
+    
+    let wsUrl;
+    if (window.location.protocol === "https:") {
+        wsUrl = "wss:";
+    } else {
+        wsUrl = "ws:";
+    }
+    wsUrl += "//" + window.location.host + "/charts-live-data";
+    
+    const socket = new WebSocket(wsUrl)
     socket.onopen = function (event) {
         console.log("WebSocket connection established");
     };
