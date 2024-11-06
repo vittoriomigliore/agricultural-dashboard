@@ -55,10 +55,10 @@ public class WeatherSimulatorService {
         weather.setField(field);
         weather.setDateTime(LocalDateTime.now());
 
-        BigDecimal humidity = BigDecimal.valueOf(humiditySimulator.getDailyMeanHumidity());
+        BigDecimal humidity = BigDecimal.valueOf(humiditySimulator.simulateHumidityForMinute());
         BigDecimal precipitation = BigDecimal.valueOf(rainSimulator.simulatePrecipitationPerMinute());
-        BigDecimal temperature = BigDecimal.valueOf(temperatureSimulator.getDailyMeanTemperature());
-        BigDecimal windSpeed = BigDecimal.valueOf(windSpeedSimulator.getDailyMeanWindSpeed());
+        BigDecimal temperature = BigDecimal.valueOf(temperatureSimulator.simulateTemperatureForMinute());
+        BigDecimal windSpeed = BigDecimal.valueOf(windSpeedSimulator.simulateWindSpeedForMinute());
         weather.setHumidity(humidity);
         weather.setPrecipitation(precipitation);
         weather.setTemperature(temperature);
