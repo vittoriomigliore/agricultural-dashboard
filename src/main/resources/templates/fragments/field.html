@@ -3,81 +3,58 @@
 <div class="field-section mb-3" th:fragment="field(field, i)" th:with="idFieldHtml=${'field' + i}">
     <div class="card">
         <div class="card-body">
-            <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
-                <div>
-                    <h3 class="fw-bold mb-3" th:text="${field.crop.name}+ ' Field'">Field Title</h3>
-                    <h6 class="op-7 mb-2" th:text="${field.size} + ' hectare'+ ${field.size == 1 ? '' : 's'}">Field
+            <div class="d-flex align-items-center align-items-md-center flex-column flex-md-row pt-2 pb-4">
+                <div class="d-flex align-items-baseline gap-3">
+                    <h3 class="fw-bold mb-0" th:text="${field.crop.name}+ ' Field'">Field Title</h3>
+                    <h6 class="op-7 mb-0" th:text="${field.size} + ' hectare'+ ${field.size == 1 ? '' : 's'}">Field
                         Description</h6>
                 </div>
                 <div class="ms-md-auto py-2 py-md-0">
                     <a class="btn btn-primary btn-round"
                        data-bs-toggle="collapse" th:href="${'#' + idFieldHtml}"
                        role="button" aria-expanded="false"
-                       th:attr="aria-controls=${idFieldHtml}"> Open/Close </a>
+                       th:attr="aria-controls=${idFieldHtml}">More</a>
                 </div>
             </div>
-            <div class="collapse show" th:id="${idFieldHtml}">
-                <h3>Weather</h3>
+            <div class="collapse" th:id="${idFieldHtml}">
                 <div>
-                    <div class="row">
+                    <div class="row row-card-no-pd mt--2">
                         <div class="col-md-6">
                             <div class="card">
-                                <div class="card-body"><h5 class="card-title">Temperature</h5>
-                                    <canvas th:id="${'temperature-'+idFieldHtml}"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-body"><h5 class="card-title">Humidity</h5>
-                                    <canvas th:id="${'humidity-'+idFieldHtml}"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-body"><h5 class="card-title">Precipitation</h5>
-                                    <canvas th:id="${'precipitation-'+idFieldHtml}"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-body"><h5 class="card-title">Wind Speed</h5>
-                                    <canvas th:id="${'windSpeed-'+idFieldHtml}"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <h3>Metrics </h3>
-                <div class="collapse show" id="metricsField1">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-body"><h5 class="card-title">Irrigation Volume</h5>
+                                <div class="card-body">
+                                    <h5 class="card-title">Irrigation Volume</h5>
+                                    <!--                                    <div style="height: 300px">-->
+                                    <!--                                        <canvas th:id="${'irrigation-'+idFieldHtml}" height="200"></canvas>-->
+                                    <!--                                    </div>-->
                                     <canvas th:id="${'irrigation-'+idFieldHtml}"></canvas>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <div class="card">
-                                <div class="card-body"><h5 class="card-title">Production Quantity</h5>
-                                    <canvas th:id="${'production-'+idFieldHtml}"></canvas>
+                                <div class="card-body">
+                                    <h5 class="card-title">Temperature</h5>
+                                    <canvas th:id="${'temperature-'+idFieldHtml}"></canvas>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Humidity</h5>
+                                    <canvas th:id="${'humidity-'+idFieldHtml}"></canvas>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <div class="card">
-                                <div class="card-body"><h5 class="card-title">Sales</h5>
-                                    <canvas th:id="${'sales-'+idFieldHtml}"></canvas>
+                                <div class="card-body">
+                                    <h5 class="card-title">Precipitation</h5>
+                                    <canvas th:id="${'precipitation-'+idFieldHtml}"></canvas>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
                             <div class="card">
-                                <div class="card-body"><h5 class="card-title">Costs</h5>
-                                    <canvas th:id="${'costs-'+idFieldHtml}"></canvas>
+                                <div class="card-body">
+                                    <h5 class="card-title">Wind Speed</h5>
+                                    <canvas th:id="${'windSpeed-'+idFieldHtml}"></canvas>
                                 </div>
                             </div>
                         </div>
