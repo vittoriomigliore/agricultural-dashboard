@@ -21,10 +21,21 @@ public class FieldDto {
     }
 
     public void addWeather(Weather weather) {
-        charts.get(EChartType.TEMPERATURE).addValue(weather.getTemperature());
-        charts.get(EChartType.PRECIPITATION).addValue(weather.getPrecipitation());
-        charts.get(EChartType.HUMIDITY).addValue(weather.getHumidity());
-        charts.get(EChartType.WIND_SPEED).addValue(weather.getWindSpeed());
+        ChartDto tempChart = charts.get(EChartType.TEMPERATURE);
+        tempChart.addValue(weather.getTemperature());
+        tempChart.addDateTime(weather.getDateTime());
+
+        ChartDto precipChart = charts.get(EChartType.PRECIPITATION);
+        precipChart.addValue(weather.getPrecipitation());
+        precipChart.addDateTime(weather.getDateTime());
+
+        ChartDto humidityChart = charts.get(EChartType.HUMIDITY);
+        humidityChart.addValue(weather.getHumidity());
+        humidityChart.addDateTime(weather.getDateTime());
+
+        ChartDto windSpeedChart = charts.get(EChartType.WIND_SPEED);
+        windSpeedChart.addValue(weather.getWindSpeed());
+        windSpeedChart.addDateTime(weather.getDateTime());
     }
 
     public Integer getField() {

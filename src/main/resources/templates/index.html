@@ -105,7 +105,6 @@
 <script th:src="@{assets/js/kaiadmin.min.js}"></script>
 <script th:inline="javascript">
     const fieldIdList = [[${fieldIdList}]]
-    console.log(fieldIdList)
     const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
     const fieldObjectList = fieldIdList.map((fieldId) => {
@@ -117,7 +116,7 @@
                 temperature: new Chart(document.getElementById('temperature-' + idHtml), {
                     type: 'line',
                     data: {
-                        labels: labels,
+                        labels: [],
                         datasets: [{
                             label: 'Temperature (°C)',
                             data: [],
@@ -129,7 +128,7 @@
                 humidity: new Chart(document.getElementById('humidity-' + idHtml), {
                     type: 'line',
                     data: {
-                        labels: labels,
+                        labels: [],
                         datasets: [{
                             label: 'Humidity (%)',
                             data: [],
@@ -141,7 +140,7 @@
                 precipitation: new Chart(document.getElementById('precipitation-' + idHtml), {
                     type: 'bar',
                     data: {
-                        labels: labels,
+                        labels: [],
                         datasets: [{
                             label: 'Precipitation (mm)',
                             data: [],
@@ -152,7 +151,7 @@
                 windSpeed: new Chart(document.getElementById('windSpeed-' + idHtml), {
                     type: 'line',
                     data: {
-                        labels: labels,
+                        labels: [],
                         datasets: [{
                             label: 'Wind Speed (km/h)',
                             data: [],
@@ -164,7 +163,7 @@
                 irrigation: new Chart(document.getElementById('irrigation-' + idHtml), {
                     type: 'line',
                     data: {
-                        labels: labels,
+                        labels: [],
                         datasets: [{
                             label: 'Irrigation Volume (L)',
                             data: [],
@@ -177,7 +176,7 @@
             }
         }
     })
-    
+
     let wsUrl;
     if (window.location.protocol === "https:") {
         wsUrl = "wss:";
@@ -185,7 +184,7 @@
         wsUrl = "ws:";
     }
     wsUrl += "//" + window.location.host + "/charts-live-data";
-    
+
     const socket = new WebSocket(wsUrl)
     socket.onopen = function (event) {
         console.log("WebSocket connection established");
@@ -204,15 +203,43 @@
         resFields.forEach((resField) => {
             const fieldObject = fieldObjectList.find((fieldObject) => fieldObject.id === resField.field);
 
-            fieldObject.charts.temperature.data.datasets[0].data = resField.charts.find((c) => c.chartType === 'temperature').data;
-            fieldObject.charts.humidity.data.datasets[0].data = resField.charts.find((c) => c.chartType === 'humidity').data;
-            fieldObject.charts.precipitation.data.datasets[0].data = resField.charts.find((c) => c.chartType === 'precipitation').data;
-            fieldObject.charts.windSpeed.data.datasets[0].data = resField.charts.find((c) => c.chartType === 'windSpeed').data;
-
+            let resTemperatures = resField.charts.find((c) => c.chartType === 'temperature');
+            fieldObject.charts.temperature.data.labels = generateChartLabels(resTemperatures.dateTimes);
+            fieldObject.charts.temperature.data.datasets[0].data = resTemperatures.data;
             fieldObject.charts.temperature.update();
+
+            let resHumidities = resField.charts.find((c) => c.chartType === 'humidity');
+            fieldObject.charts.humidity.data.labels = generateChartLabels(resHumidities.dateTimes);
+            fieldObject.charts.humidity.data.datasets[0].data = resHumidities.data;
             fieldObject.charts.humidity.update();
+
+            let resPrecipitations = resField.charts.find((c) => c.chartType === 'precipitation');
+            fieldObject.charts.precipitation.data.labels = generateChartLabels(resPrecipitations.dateTimes);
+            fieldObject.charts.precipitation.data.datasets[0].data = resPrecipitations.data;
             fieldObject.charts.precipitation.update();
+
+            let resWindSpeeds = resField.charts.find((c) => c.chartType === 'windSpeed');
+            fieldObject.charts.windSpeed.data.labels = generateChartLabels(resWindSpeeds.dateTimes);
+            fieldObject.charts.windSpeed.data.datasets[0].data = resWindSpeeds.data;
             fieldObject.charts.windSpeed.update();
+        })
+    }
+
+    function generateChartLabels(dateTimes) {
+        let dateObjects = dateTimes.map((t) => new Date(Date.parse(t)));
+        const allSameDay = dateObjects.every((date, _, arr) => {
+            const firstDate = arr[0];
+            return date.getDate() === firstDate.getDate() &&
+                date.getMonth() === firstDate.getMonth() &&
+                date.getFullYear() === firstDate.getFullYear();
+        });
+        return dateObjects.map((t) => {
+            const formattedDate = `${t.getDate()}-${t.getMonth() + 1}-${t.getFullYear()}`;
+            const formattedTime = `${t.getHours()}:${t.getMinutes()}`;
+            if (!allSameDay) {
+                return `${formattedDate} ${formattedTime}`
+            }
+            return formattedTime
         })
     }
 
