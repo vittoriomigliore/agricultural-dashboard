@@ -14,8 +14,10 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between">
-                                        <div><h5><b>Todays Income</b></h5>
-                                            <p class="text-muted">All Customs Value</p></div>
+                                        <div>
+                                            <h5><b>Todays Income</b></h5>
+                                            <p class="text-muted">All Customs Value</p>
+                                        </div>
                                         <h3 class="text-info fw-bold">$170</h3></div>
                                     <div class="progress progress-sm">
                                         <div class="progress-bar bg-info w-75" role="progressbar" aria-valuenow="75"
@@ -128,8 +130,11 @@
 <script th:src="@{assets/js/plugin/sweetalert/sweetalert.min.js}"></script> <!-- Kaiadmin JS -->
 <script th:src="@{assets/js/kaiadmin.min.js}"></script>
 <script th:inline="javascript">
-    const fieldIdList = [[${fieldIdList}]]
-
+    const fieldIds = [[${fieldIdList}]]
+</script>
+<script th:src="@{assets/js/utils.js}"></script>
+<script th:src="@{assets/js/field-charts.js}"></script>
+<script th:inline="javascript">
     const charts = {
         production: new Chart(document.getElementById('production'), {
             type: 'bar',
@@ -278,153 +283,6 @@
             }
         })
     }
-    const fieldObjectList = fieldIdList.map((fieldId, index) => {
-        const idHtml = "field" + index
-        return {
-            id: fieldId,
-            idHtml: idHtml,
-            charts: {
-                temperature: new Chart(document.getElementById('temperature-' + idHtml), {
-                    type: 'line',
-                    data: {
-                        labels: [],
-                        datasets: [{
-                            label: 'Temperature (°C)',
-                            data: [],
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            fill: false
-                        }]
-                    }
-                }),
-                humidity: new Chart(document.getElementById('humidity-' + idHtml), {
-                    type: 'line',
-                    data: {
-                        labels: [],
-                        datasets: [{
-                            label: 'Humidity (%)',
-                            data: [],
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            fill: false
-                        }]
-                    }
-                }),
-                precipitation: new Chart(document.getElementById('precipitation-' + idHtml), {
-                    type: 'bar',
-                    data: {
-                        labels: [],
-                        datasets: [{
-                            label: 'Precipitation (mm)',
-                            data: [],
-                            backgroundColor: 'rgba(153, 102, 255, 0.6)'
-                        }]
-                    }
-                }),
-                windSpeed: new Chart(document.getElementById('windSpeed-' + idHtml), {
-                    type: 'line',
-                    data: {
-                        labels: [],
-                        datasets: [{
-                            label: 'Wind Speed (km/h)',
-                            data: [],
-                            borderColor: 'rgba(255, 206, 86, 1)',
-                            fill: false
-                        }]
-                    }
-                }),
-                irrigation: new Chart(document.getElementById('irrigation-' + idHtml), {
-                    type: 'line',
-                    data: {
-                        labels: [],
-                        datasets: [{
-                            label: 'Irrigation Volume (L)',
-                            data: [100, 90, 80, 70, 50, 30, 20, 25, 45, 70, 85, 95],
-                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            fill: true
-                        }]
-                    },
-                    // options: {
-                    //     responsive: true,
-                    //     maintainAspectRatio: false,
-                    //     scales: {
-                    //         yAxes: [{
-                    //             ticks: {
-                    //                 beginAtZero: true
-                    //             }
-                    //         }]
-                    //     }
-                    // }
-                })
-            }
-        }
-    })
-
-    let wsUrl;
-    if (window.location.protocol === "https:") {
-        wsUrl = "wss:";
-    } else {
-        wsUrl = "ws:";
-    }
-    wsUrl += "//" + window.location.host + "/charts-live-data";
-
-    const socket = new WebSocket(wsUrl)
-    socket.onopen = function (event) {
-        console.log("WebSocket connection established");
-    };
-
-    socket.onclose = function (event) {
-        console.log("WebSocket connection closed");
-    };
-
-    socket.onerror = function (error) {
-        console.error("WebSocket error:", error);
-    };
-
-    socket.onmessage = function (event) {
-        const resFields = JSON.parse(event.data);
-        resFields.forEach((resField) => {
-            const fieldObject = fieldObjectList.find((fieldObject) => fieldObject.id === resField.field);
-
-            let resTemperatures = resField.charts.find((c) => c.chartType === 'temperature');
-            fieldObject.charts.temperature.data.labels = generateChartLabels(resTemperatures.dateTimes);
-            fieldObject.charts.temperature.data.datasets[0].data = resTemperatures.data;
-            fieldObject.charts.temperature.update();
-
-            let resHumidities = resField.charts.find((c) => c.chartType === 'humidity');
-            fieldObject.charts.humidity.data.labels = generateChartLabels(resHumidities.dateTimes);
-            fieldObject.charts.humidity.data.datasets[0].data = resHumidities.data;
-            fieldObject.charts.humidity.update();
-
-            let resPrecipitations = resField.charts.find((c) => c.chartType === 'precipitation');
-            fieldObject.charts.precipitation.data.labels = generateChartLabels(resPrecipitations.dateTimes);
-            fieldObject.charts.precipitation.data.datasets[0].data = resPrecipitations.data;
-            fieldObject.charts.precipitation.update();
-
-            let resWindSpeeds = resField.charts.find((c) => c.chartType === 'windSpeed');
-            fieldObject.charts.windSpeed.data.labels = generateChartLabels(resWindSpeeds.dateTimes);
-            fieldObject.charts.windSpeed.data.datasets[0].data = resWindSpeeds.data;
-            fieldObject.charts.windSpeed.update();
-        })
-    }
-
-    function generateChartLabels(dateTimes) {
-        let dateObjects = dateTimes.map((t) => new Date(Date.parse(t)));
-        const allSameDay = dateObjects.every((date, _, arr) => {
-            const firstDate = arr[0];
-            return date.getDate() === firstDate.getDate() &&
-                date.getMonth() === firstDate.getMonth() &&
-                date.getFullYear() === firstDate.getFullYear();
-        });
-        return dateObjects.map((t) => {
-            const formattedDate = `${t.getDate()}-${t.getMonth() + 1}-${t.getFullYear()}`;
-            const formattedTime = `${t.getHours()}:${t.getMinutes()}`;
-            if (!allSameDay) {
-                return `${formattedDate} ${formattedTime}`
-            }
-            return formattedTime
-        })
-    }
-
 </script>
 </body>
 </html>
