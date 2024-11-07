@@ -78,25 +78,23 @@ const fieldCharts = fieldIds.map((fieldId, index) => {
     }
 })
 
+let wsUrlCharts = getWebSocketUrl("charts-live-data");
 
+const socketCharts = new WebSocket(wsUrlCharts)
 
-let wsUrl = getWebSocketUrl("charts-live-data");
-
-const socket = new WebSocket(wsUrl)
-
-socket.onopen = function (event) {
+socketCharts.onopen = function (event) {
     console.log("WebSocket connection established");
 };
 
-socket.onclose = function (event) {
+socketCharts.onclose = function (event) {
     console.log("WebSocket connection closed");
 };
 
-socket.onerror = function (error) {
+socketCharts.onerror = function (error) {
     console.error("WebSocket error:", error);
 };
 
-socket.onmessage = function (event) {
+socketCharts.onmessage = function (event) {
     const resFields = JSON.parse(event.data);
     resFields.forEach((resField) => {
         const fieldChart = fieldCharts.find((fieldObject) => fieldObject.id === resField.field);
