@@ -82,18 +82,6 @@ let wsUrlCharts = getWebSocketUrl("charts-live-data");
 
 const socketCharts = new WebSocket(wsUrlCharts)
 
-socketCharts.onopen = function (event) {
-    console.log("WebSocket connection established");
-};
-
-socketCharts.onclose = function (event) {
-    console.log("WebSocket connection closed");
-};
-
-socketCharts.onerror = function (error) {
-    console.error("WebSocket error:", error);
-};
-
 socketCharts.onmessage = function (event) {
     const resFields = JSON.parse(event.data);
     resFields.forEach((resField) => {
