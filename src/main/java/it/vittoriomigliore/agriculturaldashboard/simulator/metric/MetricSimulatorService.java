@@ -59,7 +59,7 @@ public class MetricSimulatorService {
         salesSimulator.init(SALES_RATE);
     }
 
-    @Scheduled(fixedRate = 3600000) // Runs every 2 hours
+    @Scheduled(fixedRateString = "${simulator.metric.rate}")
     public void simulateMetrics() {
         List<Crop> crops = cropService.getAllCrops();
         crops.forEach((crop) -> {
@@ -114,6 +114,8 @@ public class MetricSimulatorService {
 
         BigDecimal amount = BigDecimal.valueOf(salesSimulator.simulateDailySales());
         sale.setSalePricePerUnit(amount);
+        BigDecimal quantity = BigDecimal.valueOf(salesSimulator.simulateDailyQuantitySales());
+        sale.setQuantitySold(quantity);
 
         saleService.saveProduction(sale);
     }

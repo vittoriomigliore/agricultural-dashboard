@@ -15,6 +15,10 @@ public class SalesSimulator {
         this.dailySalesRate = initialDailySalesRate;
     }
 
+    public int simulateDailyQuantitySales() {
+        return (int) (Math.random() * 11);
+    }
+
     // Simulate daily sales using a Poisson distribution
     public int simulateDailySales() {
         return SimulatorUtils.poisson(dailySalesRate);
