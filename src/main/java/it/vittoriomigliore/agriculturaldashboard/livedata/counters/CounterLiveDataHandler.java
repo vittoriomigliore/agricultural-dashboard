@@ -3,6 +3,7 @@ package it.vittoriomigliore.agriculturaldashboard.livedata.counters;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.vittoriomigliore.agriculturaldashboard.core.service.CostService;
+import it.vittoriomigliore.agriculturaldashboard.core.service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -21,12 +22,14 @@ import java.util.concurrent.CopyOnWriteArraySet;
 public class CounterLiveDataHandler extends TextWebSocketHandler {
 
     private final CostService costService;
+    private final SaleService saleService;
     private final ObjectMapper objectMapper;
     private final Set<WebSocketSession> sessions = new CopyOnWriteArraySet<>();
 
     @Autowired
-    public CounterLiveDataHandler(CostService costService, ObjectMapper objectMapper) {
+    public CounterLiveDataHandler(CostService costService, SaleService saleService, ObjectMapper objectMapper) {
         this.costService = costService;
+        this.saleService = saleService;
         this.objectMapper = objectMapper;
     }
 
@@ -67,9 +70,16 @@ public class CounterLiveDataHandler extends TextWebSocketHandler {
         List<CounterDto> counterDtoList = new ArrayList<>();
 
         CounterDto costCounter = new CounterDto(ECounterType.COST);
-        costCounter.setValue(costService.costsSumToToday());
-        costCounter.setChange(costService.costsPercentageChange());
+        costCounter.update(costService.costsSum(), costService.costsSumTo10DaysAgo());
         counterDtoList.add(costCounter);
+
+        CounterDto salesCounter = new CounterDto(ECounterType.SALES);
+        salesCounter.update(saleService.salesSum(), saleService.salesSumTo10DaysAgo());
+        counterDtoList.add(salesCounter);
+
+        CounterDto todaySalesCounter = new CounterDto(ECounterType.TODAY_SALES);
+        todaySalesCounter.update(saleService.todaySalesSum(), saleService.yesterdaySalesSum());
+        counterDtoList.add(todaySalesCounter);
 
         try {
             return objectMapper.writeValueAsString(counterDtoList);

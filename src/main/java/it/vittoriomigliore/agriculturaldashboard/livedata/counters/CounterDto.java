@@ -1,5 +1,7 @@
 package it.vittoriomigliore.agriculturaldashboard.livedata.counters;
 
+import it.vittoriomigliore.agriculturaldashboard.core.util.Utils;
+
 import java.math.BigDecimal;
 
 public class CounterDto {
@@ -19,15 +21,12 @@ public class CounterDto {
         return value;
     }
 
-    public void setValue(BigDecimal value) {
-        this.value = value;
-    }
-
     public Integer getChange() {
         return change;
     }
 
-    public void setChange(Integer change) {
-        this.change = change;
+    public void update(BigDecimal value, BigDecimal oldValue){
+        this.value = value;
+        this.change = Utils.calculatePercentageChange(oldValue, value);
     }
 }

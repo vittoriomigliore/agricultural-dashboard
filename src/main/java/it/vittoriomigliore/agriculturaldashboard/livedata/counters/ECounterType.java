@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum ECounterType {
     COST("cost"),
-    SALES("sales");
+    SALES("sales"),
+    TODAY_SALES("todaySales");
 
     private final String value;
 
