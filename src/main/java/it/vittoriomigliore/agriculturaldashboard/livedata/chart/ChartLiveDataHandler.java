@@ -1,4 +1,4 @@
-package it.vittoriomigliore.agriculturaldashboard.chart;
+package it.vittoriomigliore.agriculturaldashboard.livedata.chart;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

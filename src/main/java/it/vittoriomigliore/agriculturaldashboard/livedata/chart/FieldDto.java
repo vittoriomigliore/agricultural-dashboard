@@ -1,4 +1,4 @@
-package it.vittoriomigliore.agriculturaldashboard.chart;
+package it.vittoriomigliore.agriculturaldashboard.livedata.chart;
 
 import it.vittoriomigliore.agriculturaldashboard.core.entity.Field;
 import it.vittoriomigliore.agriculturaldashboard.core.entity.Weather;

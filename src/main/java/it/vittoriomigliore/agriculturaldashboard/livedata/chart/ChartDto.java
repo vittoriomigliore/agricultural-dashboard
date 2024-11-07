@@ -1,4 +1,4 @@
-package it.vittoriomigliore.agriculturaldashboard.chart;
+package it.vittoriomigliore.agriculturaldashboard.livedata.chart;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
