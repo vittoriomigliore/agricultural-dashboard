@@ -1,13 +1,13 @@
 const counters = [{
-    element: document.getElementById('counter-costs'),
-    type: 'cost'
-}, {
+    element: document.getElementById('counter-today-income'),
+    type: 'todaySales'
+},{
     element: document.getElementById('counter-income'),
     type: 'sales'
-}, {
-    element: document.getElementById('counter-today-income'),
-    type: 'today-sales'
-}]
+},{
+    element: document.getElementById('counter-costs'),
+    type: 'cost'
+}  ]
 
 let wsUrlCounters = getWebSocketUrl("counters-live-data");
 
