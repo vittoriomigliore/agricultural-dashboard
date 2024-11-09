@@ -8,11 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FieldDto {
+public class FieldChartsDto {
     private final Integer field;
     private final Map<EChartType, ChartDto> charts;
 
-    public FieldDto(Field field) {
+    public FieldChartsDto(Field field) {
         this.field = field.getId();
         charts = new HashMap<>();
         charts.put(EChartType.TEMPERATURE, new ChartDto(EChartType.TEMPERATURE));

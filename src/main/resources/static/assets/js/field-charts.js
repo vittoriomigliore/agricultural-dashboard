@@ -72,7 +72,7 @@ let wsUrlCharts = getWebSocketUrl("charts-live-data");
 const socketCharts = new WebSocket(wsUrlCharts)
 
 socketCharts.onmessage = function (event) {
-    const resFields = JSON.parse(event.data);
+    const resFields = JSON.parse(event.data).fieldCharts;
     resFields.forEach((resField) => {
         const fieldChart = fieldCharts.find((fieldObject) => fieldObject.id === resField.field);
 

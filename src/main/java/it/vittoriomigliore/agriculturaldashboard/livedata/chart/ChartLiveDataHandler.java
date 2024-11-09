@@ -73,23 +73,23 @@ public class ChartLiveDataHandler extends TextWebSocketHandler {
     }
 
     private String getPayload() {
-        List<FieldDto> fieldDtoList = new ArrayList<>();
+        ChartsPayloadDto chartsPayloadDto = new ChartsPayloadDto();
 
         List<Field> fields = fieldService.getAllFields();
         for (Field field : fields) {
-            FieldDto fieldDto = new FieldDto(field);
+            FieldChartsDto fieldChartsDto = new FieldChartsDto(field);
 
             List<Weather> weatherList = weatherService.getLastFiveMinutesWeatherByField(field);
-            weatherList.forEach((fieldDto::addWeather));
+            weatherList.forEach((fieldChartsDto::addWeather));
 
             List<Irrigation> irrigationList = irrigationService.getLastFiveMinutesIrrigationByField(field);
-            irrigationList.forEach((fieldDto::addIrrigation));
+            irrigationList.forEach((fieldChartsDto::addIrrigation));
 
-            fieldDtoList.add(fieldDto);
+            chartsPayloadDto.addFieldChart(fieldChartsDto);
         }
 
         try {
-            return objectMapper.writeValueAsString(fieldDtoList);
+            return objectMapper.writeValueAsString(chartsPayloadDto);
         } catch (JsonProcessingException e) {
             // TODO: improve logging
             e.printStackTrace();
