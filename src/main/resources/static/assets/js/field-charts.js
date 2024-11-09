@@ -62,17 +62,6 @@ const fieldCharts = fieldIds.map((fieldId, index) => {
                         fill: true
                     }]
                 },
-                // options: {
-                //     responsive: true,
-                //     maintainAspectRatio: false,
-                //     scales: {
-                //         yAxes: [{
-                //             ticks: {
-                //                 beginAtZero: true
-                //             }
-                //         }]
-                //     }
-                // }
             })
         }
     }
@@ -88,23 +77,28 @@ socketCharts.onmessage = function (event) {
         const fieldChart = fieldCharts.find((fieldObject) => fieldObject.id === resField.field);
 
         let resTemperatures = resField.charts.find((c) => c.chartType === 'temperature');
-        fieldChart.charts.temperature.data.labels = generateChartLabels(resTemperatures.dateTimes);
+        fieldChart.charts.temperature.data.labels = convertDateTimesToChartLabels(resTemperatures.dateTimes, 'minute');
         fieldChart.charts.temperature.data.datasets[0].data = resTemperatures.data;
         fieldChart.charts.temperature.update();
 
         let resHumidities = resField.charts.find((c) => c.chartType === 'humidity');
-        fieldChart.charts.humidity.data.labels = generateChartLabels(resHumidities.dateTimes);
+        fieldChart.charts.humidity.data.labels = convertDateTimesToChartLabels(resHumidities.dateTimes, 'minute');
         fieldChart.charts.humidity.data.datasets[0].data = resHumidities.data;
         fieldChart.charts.humidity.update();
 
         let resPrecipitations = resField.charts.find((c) => c.chartType === 'precipitation');
-        fieldChart.charts.precipitation.data.labels = generateChartLabels(resPrecipitations.dateTimes);
+        fieldChart.charts.precipitation.data.labels = convertDateTimesToChartLabels(resPrecipitations.dateTimes, 'minute');
         fieldChart.charts.precipitation.data.datasets[0].data = resPrecipitations.data;
         fieldChart.charts.precipitation.update();
 
         let resWindSpeeds = resField.charts.find((c) => c.chartType === 'windSpeed');
-        fieldChart.charts.windSpeed.data.labels = generateChartLabels(resWindSpeeds.dateTimes);
+        fieldChart.charts.windSpeed.data.labels = convertDateTimesToChartLabels(resWindSpeeds.dateTimes, 'minute');
         fieldChart.charts.windSpeed.data.datasets[0].data = resWindSpeeds.data;
         fieldChart.charts.windSpeed.update();
+
+        let resIrrigations = resField.charts.find((c) => c.chartType === 'irrigation');
+        fieldChart.charts.irrigation.data.labels = convertDateTimesToChartLabels(resIrrigations.dateTimes, 'minute');
+        fieldChart.charts.irrigation.data.datasets[0].data = resIrrigations.data;
+        fieldChart.charts.irrigation.update();
     })
 }

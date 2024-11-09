@@ -5,7 +5,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "IRRIGATION")
@@ -20,8 +20,8 @@ public class Irrigation {
     @JoinColumn(name = "FIELD_ID")
     private Field field;
 
-    @Column(name = "DATE")
-    private LocalDate date;
+    @Column(name = "DATETIME")
+    private LocalDateTime dateTime;
 
     @Column(name = "AMOUNT_USED", precision = 10, scale = 2)
     private BigDecimal amountUsed;
@@ -45,12 +45,12 @@ public class Irrigation {
         this.field = field;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
     public BigDecimal getAmountUsed() {

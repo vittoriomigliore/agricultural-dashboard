@@ -1,6 +1,7 @@
 package it.vittoriomigliore.agriculturaldashboard.livedata.chart;
 
 import it.vittoriomigliore.agriculturaldashboard.core.entity.Field;
+import it.vittoriomigliore.agriculturaldashboard.core.entity.Irrigation;
 import it.vittoriomigliore.agriculturaldashboard.core.entity.Weather;
 
 import java.util.HashMap;
@@ -18,6 +19,7 @@ public class FieldDto {
         charts.put(EChartType.PRECIPITATION, new ChartDto(EChartType.PRECIPITATION));
         charts.put(EChartType.HUMIDITY, new ChartDto(EChartType.HUMIDITY));
         charts.put(EChartType.WIND_SPEED, new ChartDto(EChartType.WIND_SPEED));
+        charts.put(EChartType.IRRIGATION, new ChartDto(EChartType.IRRIGATION));
     }
 
     public void addWeather(Weather weather) {
@@ -36,6 +38,12 @@ public class FieldDto {
         ChartDto windSpeedChart = charts.get(EChartType.WIND_SPEED);
         windSpeedChart.addValue(weather.getWindSpeed());
         windSpeedChart.addDateTime(weather.getDateTime());
+    }
+
+    public void addIrrigation(Irrigation irrigation) {
+        ChartDto irrigationChart = charts.get(EChartType.IRRIGATION);
+        irrigationChart.addValue(irrigation.getAmountUsed());
+        irrigationChart.addDateTime(irrigation.getDateTime());
     }
 
     public Integer getField() {

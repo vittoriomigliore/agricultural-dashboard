@@ -3,8 +3,10 @@ package it.vittoriomigliore.agriculturaldashboard.livedata.chart;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.vittoriomigliore.agriculturaldashboard.core.entity.Field;
+import it.vittoriomigliore.agriculturaldashboard.core.entity.Irrigation;
 import it.vittoriomigliore.agriculturaldashboard.core.entity.Weather;
 import it.vittoriomigliore.agriculturaldashboard.core.service.FieldService;
+import it.vittoriomigliore.agriculturaldashboard.core.service.IrrigationService;
 import it.vittoriomigliore.agriculturaldashboard.core.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -25,13 +27,15 @@ public class ChartLiveDataHandler extends TextWebSocketHandler {
 
     private final FieldService fieldService;
     private final WeatherService weatherService;
+    private final IrrigationService irrigationService;
     private final ObjectMapper objectMapper;
     private final Set<WebSocketSession> sessions = new CopyOnWriteArraySet<>();
 
     @Autowired
-    public ChartLiveDataHandler(FieldService fieldService, WeatherService weatherService, ObjectMapper objectMapper) {
+    public ChartLiveDataHandler(FieldService fieldService, WeatherService weatherService, IrrigationService irrigationService, ObjectMapper objectMapper) {
         this.fieldService = fieldService;
         this.weatherService = weatherService;
+        this.irrigationService = irrigationService;
         this.objectMapper = objectMapper;
     }
 
@@ -77,6 +81,9 @@ public class ChartLiveDataHandler extends TextWebSocketHandler {
 
             List<Weather> weatherList = weatherService.getLastFiveMinutesWeatherByField(field);
             weatherList.forEach((fieldDto::addWeather));
+
+            List<Irrigation> irrigationList = irrigationService.getLastFiveMinutesIrrigationByField(field);
+            irrigationList.forEach((fieldDto::addIrrigation));
 
             fieldDtoList.add(fieldDto);
         }

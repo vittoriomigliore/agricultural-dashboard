@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -88,7 +89,7 @@ public class MetricSimulatorService {
     private void saveSimulatedIrrigation(Field field) {
         Irrigation irrigation = new Irrigation();
         irrigation.setField(field);
-        irrigation.setDate(LocalDate.now());
+        irrigation.setDateTime(LocalDateTime.now());
 
         BigDecimal amount = BigDecimal.valueOf(irrigationSimulator.simulateDailyIrrigation());
         irrigation.setAmountUsed(amount);
