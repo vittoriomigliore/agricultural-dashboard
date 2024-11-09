@@ -1,13 +1,16 @@
 package it.vittoriomigliore.agriculturaldashboard.livedata.chart;
 
+import it.vittoriomigliore.agriculturaldashboard.livedata.chart.companychart.CompanyChartDto;
+import it.vittoriomigliore.agriculturaldashboard.livedata.chart.fieldchart.FieldChartsDto;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChartsPayloadDto {
+public class PayloadDto {
     List<FieldChartsDto> fieldCharts;
-    List<ChartDto> companyCharts;
+    List<CompanyChartDto> companyCharts;
 
-    public ChartsPayloadDto() {
+    public PayloadDto() {
         fieldCharts = new ArrayList<>();
         companyCharts = new ArrayList<>();
     }
@@ -16,7 +19,7 @@ public class ChartsPayloadDto {
         fieldCharts.add(fieldChart);
     }
 
-    public void addCompanyChart(ChartDto companyChart) {
+    public void addCompanyChart(CompanyChartDto companyChart) {
         companyCharts.add(companyChart);
     }
 
@@ -24,7 +27,7 @@ public class ChartsPayloadDto {
         return fieldCharts;
     }
 
-    public List<ChartDto> getCompanyCharts() {
+    public List<CompanyChartDto> getCompanyCharts() {
         return companyCharts;
     }
 }
