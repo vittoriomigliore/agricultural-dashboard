@@ -17,8 +17,8 @@ abstract public class ChartDto {
         dateTimes.add(dateTime);
     }
 
-    public EChartType getChartType() {
-        return chartType;
+    public String getChartType() {
+        return chartType.getValue();
     }
 
     public List<LocalDateTime> getDateTimes() {

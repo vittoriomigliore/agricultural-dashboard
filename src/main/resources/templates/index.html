@@ -130,13 +130,20 @@
 <script th:src="@{assets/js/utils.js}"></script>
 <script th:inline="javascript">
     const fieldIds = [[${fieldIdList}]]
-    let wsUrlCharts = getWebSocketUrl("charts-live-data");
-    const socketCharts = new WebSocket(wsUrlCharts)
 </script>
 <script th:src="@{assets/js/counters.js}"></script>
 <script th:src="@{assets/js/field-charts.js}"></script>
 <script th:src="@{assets/js/company-charts.js}"></script>
 <script th:inline="javascript">
+    let wsUrlCharts = getWebSocketUrl("charts-live-data");
+    const socketCharts = new WebSocket(wsUrlCharts)
+    socketCharts.onmessage = function (event) {
+        const resFields = JSON.parse(event.data).fieldCharts;
+        updateFieldCharts(resFields);
+
+        const resCompany = JSON.parse(event.data).companyCharts;
+        updateCompanyCharts(resCompany);
+    }
 </script>
 </body>
 </html>

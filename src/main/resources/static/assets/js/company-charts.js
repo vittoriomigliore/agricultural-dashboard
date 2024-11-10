@@ -126,9 +126,7 @@ const companyCharts = {
     })
 }
 
-socketCharts.onmessage = function (event) {
-    const resCharts = JSON.parse(event.data).companyCharts;
-
+function updateCompanyCharts(resCharts) {
     var resProduction = resCharts.find((c) => c.chartType === 'production');
     companyCharts.production.data.labels = convertDateTimesToChartLabels(resProduction.dateTimes, 'month');
     companyCharts.production.data.datasets = [];

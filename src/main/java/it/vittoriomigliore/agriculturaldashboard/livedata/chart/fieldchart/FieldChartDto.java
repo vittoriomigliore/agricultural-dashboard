@@ -11,7 +11,7 @@ public class FieldChartDto extends ChartDto {
 
     public FieldChartDto(EChartType chartType) {
         super(chartType);
-        this.dataset = new FieldDatasetDto();
+        this.dataset = new FieldDatasetDto(chartType.getLabel());
     }
 
     public void addValue(BigDecimal value) {
