@@ -68,12 +68,9 @@ public class MetricSimulatorService {
             fields.forEach((field) -> {
                 saveSimulatedCost(crop, field);
                 saveSimulatedIrrigation(field);
-//                Production production = saveSimulatedProduction(field, crop);
-//                saveSimulatedSale(production);
             });
         });
     }
-
 
     @Scheduled(fixedRateString = "${simulator.production.rate}")
     public void simulateProduction() {
@@ -83,6 +80,15 @@ public class MetricSimulatorService {
             fields.forEach((field) -> {
                 saveSimulatedProduction(field, crop);
             });
+        });
+    }
+
+    @Scheduled(fixedRateString = "${simulator.sales.rate}")
+    public void simulateSales() {
+        List<Crop> crops = cropService.getAllCrops();
+        crops.forEach((crop) -> {
+            Production production = productionService.getLastProductionByCrop(crop);
+            saveSimulatedSale(production);
         });
     }
 
@@ -109,7 +115,7 @@ public class MetricSimulatorService {
         irrigationService.saveIrrigation(irrigation);
     }
 
-    private Production saveSimulatedProduction(Field field, Crop crop) {
+    private void saveSimulatedProduction(Field field, Crop crop) {
         Production production = new Production();
         production.setField(field);
         production.setCrop(crop);
@@ -118,7 +124,7 @@ public class MetricSimulatorService {
         BigDecimal quantity = BigDecimal.valueOf(productionSimulator.simulateDailyProduction());
         production.setQuantity(quantity);
 
-        return productionService.saveProduction(production);
+        productionService.saveProduction(production);
     }
 
     private void saveSimulatedSale(Production production) {

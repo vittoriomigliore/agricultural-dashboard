@@ -31,4 +31,8 @@ public class ProductionService {
         LocalDate endDate = LocalDate.of(currentYear, month, month.length(currentYearObject.isLeap()));
         return productionRepository.findAllByCropAndHarvestDateBetween(crop, startDate, endDate);
     }
+
+    public Production getLastProductionByCrop(Crop crop) {
+        return productionRepository.findFirstByCropOrderByHarvestDateDesc(crop);
+    }
 }

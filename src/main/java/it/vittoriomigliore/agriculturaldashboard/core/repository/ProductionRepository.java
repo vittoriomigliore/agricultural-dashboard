@@ -10,4 +10,6 @@ import java.util.List;
 public interface ProductionRepository extends JpaRepository<Production, Integer> {
 
     List<Production> findAllByCropAndHarvestDateBetween(Crop crop, LocalDate startDate, LocalDate endDate);
+
+    Production findFirstByCropOrderByHarvestDateDesc(Crop crop);
 }
