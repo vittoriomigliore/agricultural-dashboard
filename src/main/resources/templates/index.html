@@ -127,161 +127,16 @@
 <script th:src="@{assets/js/plugin/jsvectormap/world.js}"></script> <!-- Sweet Alert -->
 <script th:src="@{assets/js/plugin/sweetalert/sweetalert.min.js}"></script> <!-- Kaiadmin JS -->
 <script th:src="@{assets/js/kaiadmin.min.js}"></script>
+<script th:src="@{assets/js/utils.js}"></script>
 <script th:inline="javascript">
     const fieldIds = [[${fieldIdList}]]
+    let wsUrlCharts = getWebSocketUrl("charts-live-data");
+    const socketCharts = new WebSocket(wsUrlCharts)
 </script>
-<script th:src="@{assets/js/utils.js}"></script>
 <script th:src="@{assets/js/counters.js}"></script>
 <script th:src="@{assets/js/field-charts.js}"></script>
+<script th:src="@{assets/js/company-charts.js}"></script>
 <script th:inline="javascript">
-    const charts = {
-        production: new Chart(document.getElementById('production'), {
-            type: 'bar',
-            data: {
-                labels: ['January', 'February', 'March'], // Months or other time intervals
-                datasets: [
-                    {
-                        label: 'Wheat',
-                        data: [300, 280, 350],
-                        backgroundColor: 'rgba(54, 162, 235, 0.8)',
-                    },
-                    {
-                        label: 'Corn',
-                        data: [150, 200, 170],
-                        backgroundColor: 'rgba(75, 192, 192, 0.8)',
-                    },
-                    {
-                        label: 'Tomato',
-                        data: [220, 210, 260],
-                        backgroundColor: 'rgba(255, 99, 132, 0.8)',
-                    },
-                    {
-                        label: 'Potato',
-                        data: [100, 120, 90],
-                        backgroundColor: 'rgba(255, 206, 86, 0.8)',
-                    },
-                ]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                },
-                scales: {
-                    x: {
-                        stacked: true,
-                    },
-                    y: {
-                        stacked: true,
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Production Quantity (tons)',
-                        },
-                    },
-                },
-            }
-        }),
-        sales: new Chart(document.getElementById('sales'), {
-            type: 'bar',
-            data: {
-                labels: ['January', 'February', 'March', 'April'], // Time periods
-                datasets: [
-                    {
-                        label: 'Production Quantity',
-                        data: [500, 600, 550, 700], // Production data per period
-                        type: 'bar',
-                        backgroundColor: 'rgba(75, 192, 192, 0.8)',
-                    },
-                    {
-                        label: 'Sales Quantity',
-                        data: [450, 580, 520, 680], // Sales data per period
-                        type: 'line',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        tension: 0.3,
-                    },
-                ],
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: 'Production vs. Sales Over Time',
-                    },
-                }
-            }
-        }),
-        costs: new Chart(document.getElementById('costs'), {
-            type: 'line',
-            data: {
-                labels: ['January', 'February', 'March', 'April'], // Time intervals (e.g., months or weeks)
-                datasets: [
-                    {
-                        label: 'Wheat',
-                        data: [1200, 1300, 1250, 1400], // Costs for each time period
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        tension: 0.3, // Optional: curve line for smoother look
-                    },
-                    {
-                        label: 'Corn',
-                        data: [900, 850, 800, 950],
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        tension: 0.3,
-                    },
-                    {
-                        label: 'Tomato',
-                        data: [1100, 1150, 1200, 1180],
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        tension: 0.3,
-                    },
-                    {
-                        label: 'Potato',
-                        data: [700, 750, 720, 780],
-                        borderColor: 'rgba(255, 206, 86, 1)',
-                        backgroundColor: 'rgba(255, 206, 86, 0.2)',
-                        tension: 0.3,
-                    },
-                ],
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: 'Cost Trends per Crop',
-                    },
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Cost (Currency)',
-                        },
-                    },
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Time Period',
-                        },
-                    },
-                },
-            }
-        })
-    }
 </script>
 </body>
 </html>

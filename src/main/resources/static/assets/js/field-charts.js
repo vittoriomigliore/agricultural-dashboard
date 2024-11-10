@@ -67,10 +67,6 @@ const fieldCharts = fieldIds.map((fieldId, index) => {
     }
 })
 
-let wsUrlCharts = getWebSocketUrl("charts-live-data");
-
-const socketCharts = new WebSocket(wsUrlCharts)
-
 socketCharts.onmessage = function (event) {
     const resFields = JSON.parse(event.data).fieldCharts;
     resFields.forEach((resField) => {
