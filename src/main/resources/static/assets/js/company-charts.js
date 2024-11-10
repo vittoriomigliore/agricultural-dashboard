@@ -18,11 +18,7 @@ const companyCharts = {
                 },
                 y: {
                     stacked: true,
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Production Quantity (tons)',
-                    },
+                    beginAtZero: true
                 },
             },
         }

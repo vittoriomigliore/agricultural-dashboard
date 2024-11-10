@@ -6,8 +6,6 @@ import java.math.RoundingMode;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Utils {
     public static Integer calculatePercentageChange(BigDecimal oldValue, BigDecimal newValue) {
@@ -24,25 +22,19 @@ public class Utils {
         return percentageChange.setScale(0, RoundingMode.HALF_UP).intValue();
     }
 
-    public static Map<String, Integer> getColorRGB(String name) {
-        Map<String, Integer> rgb = new HashMap<>();
-
+    public static Color getColorFromString(String s) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(name.getBytes(StandardCharsets.UTF_8));
+            byte[] hash = digest.digest(s.getBytes(StandardCharsets.UTF_8));
 
             int r = Byte.toUnsignedInt(hash[0]);
             int g = Byte.toUnsignedInt(hash[1]);
             int b = Byte.toUnsignedInt(hash[2]);
 
-            rgb.put("r", r);
-            rgb.put("g", g);
-            rgb.put("b", b);
+            return new Color(r, g, b);
 
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("SHA-256 algorithm not found!", e);
         }
-
-        return rgb;
     }
 }

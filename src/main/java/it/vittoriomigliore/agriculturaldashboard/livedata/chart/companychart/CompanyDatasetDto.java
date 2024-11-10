@@ -4,8 +4,10 @@ import it.vittoriomigliore.agriculturaldashboard.core.entity.Crop;
 import it.vittoriomigliore.agriculturaldashboard.core.util.Utils;
 import it.vittoriomigliore.agriculturaldashboard.livedata.chart.ChartDatasetDto;
 
+import java.awt.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +25,13 @@ public class CompanyDatasetDto implements ChartDatasetDto {
     }
 
     public Map<String, Integer> getBackgroundColor() {
-        return Utils.getColorRGB(crop.getName());
+        Color color = crop.getColor();
+
+        Map<String, Integer> rgb = new HashMap<>();
+        rgb.put("r", color.getRed());
+        rgb.put("g", color.getGreen());
+        rgb.put("b", color.getBlue());
+        return rgb;
     }
 
     @Override

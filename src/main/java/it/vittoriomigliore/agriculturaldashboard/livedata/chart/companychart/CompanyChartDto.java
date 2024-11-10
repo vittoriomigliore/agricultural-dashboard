@@ -24,7 +24,7 @@ public class CompanyChartDto extends ChartDto {
     }
 
     public List<CompanyDatasetDto> getDatasets() {
-        return map.values().stream().toList();
+        return map.values().stream().sorted((CompanyDatasetDto o1, CompanyDatasetDto o2) -> o2.crop.getName().compareTo(o1.crop.getName())).toList();
     }
 
 }
