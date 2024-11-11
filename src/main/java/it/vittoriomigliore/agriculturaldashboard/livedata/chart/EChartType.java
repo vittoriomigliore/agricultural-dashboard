@@ -7,7 +7,7 @@ public enum EChartType {
     PRECIPITATION("precipitation"),
     IRRIGATION("irrigation"),
     COST("cost"),
-    PRODUCTION("production"),
+    CROP_PRODUCTION("production"),
     SALES("sales");
 
     private final String value;
@@ -24,7 +24,7 @@ public enum EChartType {
             case PRECIPITATION -> "precipitation";
             case IRRIGATION -> "irrigation";
             case COST -> "cost";
-            case PRODUCTION -> "production";
+            case CROP_PRODUCTION -> "crop-production";
             case SALES -> "sales";
         };
     }
@@ -37,7 +37,7 @@ public enum EChartType {
             case PRECIPITATION -> "Precipitation (mm)";
             case IRRIGATION -> "Irrigation Volume (L)";
             case COST -> "Cost";
-            case PRODUCTION -> "Production";
+            case CROP_PRODUCTION -> "Production";
             case SALES -> "Sales";
         };
     }

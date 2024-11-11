@@ -26,7 +26,7 @@ public class CompanyBuilder {
     public List<CompanyChartDto> getCompanyCharts() {
 
         CompanyChartDto costChart = new CompanyChartDto(EChartType.COST);
-        CompanyChartDto productionChart = new CompanyChartDto(EChartType.PRODUCTION);
+        CompanyChartDto productionChart = new CompanyChartDto(EChartType.CROP_PRODUCTION);
         CompanyChartDto salesChart = new CompanyChartDto(EChartType.SALES);
 
         List<Crop> crops = cropService.getAllCrops();

@@ -1,5 +1,5 @@
 const companyCharts = {
-    production: new Chart(document.getElementById('production'), {
+    cropProduction: new Chart(document.getElementById('crop-production'), {
         type: 'bar',
         data: {
             labels: [],
@@ -123,15 +123,15 @@ const companyCharts = {
 }
 
 function updateCompanyCharts(resCharts) {
-    var resProduction = resCharts.find((c) => c.chartType === 'production');
-    companyCharts.production.data.labels = convertDateTimesToChartLabels(resProduction.dateTimes, 'month');
-    companyCharts.production.data.datasets = [];
-    resProduction.datasets.forEach((dataset) => {
-        companyCharts.production.data.datasets.push({
+    var resCropProduction = resCharts.find((c) => c.chartType === 'crop-production');
+    companyCharts.cropProduction.data.labels = convertDateTimesToChartLabels(resCropProduction.dateTimes, 'month');
+    companyCharts.cropProduction.data.datasets = [];
+    resCropProduction.datasets.forEach((dataset) => {
+        companyCharts.cropProduction.data.datasets.push({
             label: dataset.label,
             data: dataset.data,
             backgroundColor: `rgba(${dataset.backgroundColor.r}, ${dataset.backgroundColor.g}, ${dataset.backgroundColor.b}, 0.8)`
         })
     })
-    companyCharts.production.update();
+    companyCharts.cropProduction.update();
 }
