@@ -60,16 +60,10 @@ public class MetricSimulatorService {
         salesSimulator.init(SALES_RATE);
     }
 
-    @Scheduled(fixedRateString = "${simulator.metric.rate}")
-    public void simulateMetrics() {
-        List<Crop> crops = cropService.getAllCrops();
-        crops.forEach((crop) -> {
-            List<Field> fields = fieldService.getAllFieldsByCrop(crop);
-            fields.forEach((field) -> {
-                saveSimulatedCost(crop, field);
-                saveSimulatedIrrigation(field);
-            });
-        });
+    @Scheduled(fixedRateString = "${simulator.irrigation.rate}")
+    public void simulateIrrigation() {
+        List<Field> fields = fieldService.getAllFields();
+        fields.forEach(this::saveSimulatedIrrigation);
     }
 
     @Scheduled(fixedRateString = "${simulator.production.rate}")
@@ -89,6 +83,14 @@ public class MetricSimulatorService {
         crops.forEach((crop) -> {
             Production production = productionService.getLastProductionByCrop(crop);
             saveSimulatedSale(production);
+        });
+    }
+
+    @Scheduled(fixedRateString = "${simulator.costs.rate}")
+    public void simulateCost() {
+        List<Field> fields = fieldService.getAllFields();
+        fields.forEach((field) -> {
+            saveSimulatedCost(field.getCrop(), field);
         });
     }
 
