@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<div class="main-header" th:fragment="navbar">
+<div class="main-header" th:fragment="navbar(companyName)">
     <div class="main-header-logo">
         <!-- Logo Header -->
         <div class="logo-header" data-background-color="dark">
@@ -26,7 +26,8 @@
     </div>
     <!-- Navbar Header -->
     <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
-        <div class="container-fluid">
+        <div class="container-fluid align-items-center">
+            <h1 class="h4 fw-bold text-uppercase text-primary op-8" th:text="${companyName}"></h1>
         </div>
     </nav>
     <!-- End Navbar -->

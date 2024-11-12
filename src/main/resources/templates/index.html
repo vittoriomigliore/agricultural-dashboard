@@ -6,7 +6,7 @@
     <div th:replace="~{fragments/sidebar::sidebar}">
     </div>
     <div class="main-panel">
-        <div th:replace="~{fragments/navbar::navbar}">
+        <div th:replace="~{fragments/navbar::navbar(${companyName})}">
         </div>
         <div class="container">
             <div class="page-inner">
@@ -109,9 +109,9 @@
                 </div>
             </div>
         </div>
+        <footer th:replace="~{fragments/footer :: footer}"></footer>
     </div>
 
-    <footer th:replace="~{fragments/footer :: footer}"></footer>
 </div>
 <!-- Core JS Files -->
 <script th:src="@{assets/js/core/jquery-3.7.1.min.js}"></script>
