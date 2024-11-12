@@ -26,9 +26,6 @@ public class Irrigation {
     @Column(name = "AMOUNT_USED", precision = 10, scale = 2)
     private BigDecimal amountUsed;
 
-    @Column(name = "METHOD")
-    private String method;
-
     public Integer getId() {
         return id;
     }
@@ -59,14 +56,6 @@ public class Irrigation {
 
     public void setAmountUsed(BigDecimal amountUsed) {
         this.amountUsed = amountUsed;
-    }
-
-    public String getMethod() {
-        return method;
-    }
-
-    public void setMethod(String method) {
-        this.method = method;
     }
 
 }

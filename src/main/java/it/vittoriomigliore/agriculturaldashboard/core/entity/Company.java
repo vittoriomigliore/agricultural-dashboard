@@ -15,15 +15,6 @@ public class Company {
     @Column(name = "NAME")
     private String name;
 
-    @Column(name = "LOCATION")
-    private String location;
-
-    @Column(name = "OWNER")
-    private String owner;
-
-    @Column(name = "ESTABLISHED_YEAR")
-    private Integer establishedYear;
-
     public Integer getId() {
         return id;
     }
@@ -38,30 +29,6 @@ public class Company {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
-    public Integer getEstablishedYear() {
-        return establishedYear;
-    }
-
-    public void setEstablishedYear(Integer establishedYear) {
-        this.establishedYear = establishedYear;
     }
 
 }

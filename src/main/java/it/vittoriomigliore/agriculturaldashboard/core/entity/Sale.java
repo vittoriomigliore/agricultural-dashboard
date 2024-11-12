@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "SALES")
+@Table(name = "SALE")
 public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,9 +28,6 @@ public class Sale {
 
     @Column(name = "SALE_PRICE_PER_UNIT", precision = 10, scale = 2)
     private BigDecimal salePricePerUnit;
-
-    @Column(name = "BUYER")
-    private String buyer;
 
     public Integer getId() {
         return id;
@@ -70,14 +67,6 @@ public class Sale {
 
     public void setSalePricePerUnit(BigDecimal salePricePerUnit) {
         this.salePricePerUnit = salePricePerUnit;
-    }
-
-    public String getBuyer() {
-        return buyer;
-    }
-
-    public void setBuyer(String buyer) {
-        this.buyer = buyer;
     }
 
 }

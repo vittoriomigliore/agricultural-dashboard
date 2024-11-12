@@ -16,10 +16,6 @@ public class Crop {
     @Column(name = "NAME")
     private String name;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "TYPE")
-    private ECropType type;
-
     public Integer getId() {
         return id;
     }
@@ -36,14 +32,7 @@ public class Crop {
         this.name = name;
     }
 
-    public ECropType getType() {
-        return type;
-    }
-
-    public void setType(ECropType type) {
-        this.type = type;
-    }
-
+    // use enums
     public Color getColor() {
         return switch (this.name) {
             case "Wheat" -> new Color(54, 162, 235);

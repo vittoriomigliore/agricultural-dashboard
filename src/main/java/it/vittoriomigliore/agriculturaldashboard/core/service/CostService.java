@@ -1,7 +1,7 @@
 package it.vittoriomigliore.agriculturaldashboard.core.service;
 
 import it.vittoriomigliore.agriculturaldashboard.core.entity.Cost;
-import it.vittoriomigliore.agriculturaldashboard.core.entity.Crop;
+import it.vittoriomigliore.agriculturaldashboard.core.entity.Field;
 import it.vittoriomigliore.agriculturaldashboard.core.repository.CostRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,12 +37,12 @@ public class CostService {
         return costRepository.sumCostsByDateBefore(tenDaysAgo);
     }
 
-    public BigDecimal costsSumByCropAndMonth(Crop crop, Month month) {
+    public BigDecimal costsSumByFieldAndMonth(Field field, Month month) {
         int currentYear = LocalDate.now().getYear();
         Year currentYearObject = Year.of(currentYear);
         LocalDate startDate = LocalDate.of(currentYear, month, 1);
         LocalDate endDate = LocalDate.of(currentYear, month, month.length(currentYearObject.isLeap()));
-        return costRepository.sumCostsByCropAndDateBetween(crop, startDate, endDate);
+        return costRepository.sumCostsByFieldAndDateBetween(field, startDate, endDate);
     }
 
 }

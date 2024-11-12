@@ -1,11 +1,7 @@
 package it.vittoriomigliore.agriculturaldashboard.livedata.chart.companychart;
 
-import it.vittoriomigliore.agriculturaldashboard.core.entity.Crop;
-import it.vittoriomigliore.agriculturaldashboard.core.entity.Production;
-import it.vittoriomigliore.agriculturaldashboard.core.service.CostService;
-import it.vittoriomigliore.agriculturaldashboard.core.service.CropService;
-import it.vittoriomigliore.agriculturaldashboard.core.service.ProductionService;
-import it.vittoriomigliore.agriculturaldashboard.core.service.SaleService;
+import it.vittoriomigliore.agriculturaldashboard.core.entity.Field;
+import it.vittoriomigliore.agriculturaldashboard.core.service.*;
 import it.vittoriomigliore.agriculturaldashboard.livedata.chart.common.EChartType;
 import org.springframework.stereotype.Component;
 
@@ -21,12 +17,14 @@ public class CompanyBuilder {
     private final ProductionService productionService;
     private final CostService costService;
     private final SaleService saleService;
+    private final FieldService fieldService;
 
-    public CompanyBuilder(CropService cropService, ProductionService productionService, CostService costService, SaleService saleService) {
+    public CompanyBuilder(CropService cropService, ProductionService productionService, CostService costService, SaleService saleService, FieldService fieldService) {
         this.cropService = cropService;
         this.productionService = productionService;
         this.costService = costService;
         this.saleService = saleService;
+        this.fieldService = fieldService;
     }
 
     public List<ICompanyChartDto> getCompanyCharts() {
@@ -36,7 +34,7 @@ public class CompanyBuilder {
     private ICompanyChartDto getCropProductionChart() {
         CropChartDto cropProductionChart = new CropChartDto(EChartType.CROP_PRODUCTION);
 
-        List<Crop> crops = cropService.getAllCrops();
+        List<Field> fields = fieldService.getAllFields();
 
         Month currentMonth = LocalDate.now().getMonth();
         List<Month> months = List.of(currentMonth.minus(3), currentMonth.minus(2), currentMonth.minus(1), currentMonth);
@@ -45,10 +43,9 @@ public class CompanyBuilder {
             LocalDateTime firstDayOfMonth = LocalDateTime.of(LocalDate.now().getYear(), month.getValue(), 1, 0, 0);
             cropProductionChart.addDateTime(firstDayOfMonth);
 
-            for (Crop crop : crops) {
-                List<Production> productions = productionService.getAllProductionsByCropAndMonth(crop, month);
-                BigDecimal monthCropProduction = productions.stream().map(Production::getQuantity).reduce(BigDecimal.ZERO, BigDecimal::add);
-                cropProductionChart.addValue(crop, monthCropProduction);
+            for (Field field : fields) {
+                BigDecimal monthCropProduction = productionService.productionSumByFieldAndMonth(field, month);
+                cropProductionChart.addValue(field.getCrop(), monthCropProduction);
             }
         }
 
@@ -64,8 +61,7 @@ public class CompanyBuilder {
             LocalDateTime firstDayOfMonth = LocalDateTime.of(LocalDate.now().getYear(), month.getValue(), 1, 0, 0);
             productionVsSalesChart.addDateTime(firstDayOfMonth);
 
-            List<Production> productionList = productionService.getAllProductionsByMonth(month);
-            BigDecimal monthProduction = productionList.stream().map(Production::getQuantity).reduce(BigDecimal.ZERO, BigDecimal::add);
+            BigDecimal monthProduction = productionService.productionSumByMonth(month);
             BigDecimal monthSales = saleService.salesSumByMonth(month);
 
             productionVsSalesChart.addProductionValue(monthProduction);
@@ -77,7 +73,7 @@ public class CompanyBuilder {
     private ICompanyChartDto getCostChart() {
         CropChartDto costChart = new CropChartDto(EChartType.CROP_COST);
 
-        List<Crop> crops = cropService.getAllCrops();
+        List<Field> fields = fieldService.getAllFields();
 
         Month currentMonth = LocalDate.now().getMonth();
         List<Month> months = List.of(currentMonth.minus(3), currentMonth.minus(2), currentMonth.minus(1), currentMonth);
@@ -86,8 +82,8 @@ public class CompanyBuilder {
             LocalDateTime firstDayOfMonth = LocalDateTime.of(LocalDate.now().getYear(), month.getValue(), 1, 0, 0);
             costChart.addDateTime(firstDayOfMonth);
 
-            for (Crop crop : crops) {
-                costChart.addValue(crop, costService.costsSumByCropAndMonth(crop, month));
+            for (Field field : fields) {
+                costChart.addValue(field.getCrop(), costService.costsSumByFieldAndMonth(field, month));
             }
         }
 

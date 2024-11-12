@@ -20,19 +20,11 @@ public class Production {
     @JoinColumn(name = "FIELD_ID")
     private Field field;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "CROP_ID")
-    private Crop crop;
-
     @Column(name = "HARVEST_DATE")
     private LocalDate harvestDate;
 
     @Column(name = "QUANTITY", precision = 10, scale = 2)
     private BigDecimal quantity;
-
-    @Column(name = "QUALITY_RATING")
-    private Integer qualityRating;
 
     public Integer getId() {
         return id;
@@ -50,14 +42,6 @@ public class Production {
         this.field = field;
     }
 
-    public Crop getCrop() {
-        return crop;
-    }
-
-    public void setCrop(Crop crop) {
-        this.crop = crop;
-    }
-
     public LocalDate getHarvestDate() {
         return harvestDate;
     }
@@ -72,14 +56,6 @@ public class Production {
 
     public void setQuantity(BigDecimal quantity) {
         this.quantity = quantity;
-    }
-
-    public Integer getQualityRating() {
-        return qualityRating;
-    }
-
-    public void setQualityRating(Integer qualityRating) {
-        this.qualityRating = qualityRating;
     }
 
 }

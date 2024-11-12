@@ -6,6 +6,5 @@ CREATE TABLE IF NOT EXISTS irrigation
     field_id      INT,
     datetime      DATETIME,
     amount_used   DECIMAL(10, 2),
-    method        VARCHAR(255),
     FOREIGN KEY (field_id) REFERENCES field (field_id)
 );
