@@ -13,14 +13,22 @@ const companyCharts = {
                 },
             },
             scales: {
-                x: {
-                    stacked: true,
-                },
-                y: {
-                    stacked: true,
-                    beginAtZero: true
-                },
+                yAxes: [{
+                    ticks: {
+                        callback: function(value, index, values) {
+                            return '€' + formatNumber(value);
+                        }
+                    }
+                }]
             },
+            tooltips: {
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                        const transformedValue = formatNumber(tooltipItem.yLabel);
+                        return data.datasets[tooltipItem.datasetIndex].label + ': €' + transformedValue;
+                    }
+                }
+            }
         }
     }),
     productionVsSales: new Chart(document.getElementById('sales'), {
@@ -54,6 +62,23 @@ const companyCharts = {
                     display: true,
                     text: 'Production vs. Sales Over Time',
                 },
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        callback: function(value, index, values) {
+                            return '€' + formatNumber(value);
+                        }
+                    }
+                }]
+            },
+            tooltips: {
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                        const transformedValue = formatNumber(tooltipItem.yLabel);
+                        return data.datasets[tooltipItem.datasetIndex].label + ': €' + transformedValue;
+                    }
+                }
             }
         }
     }),
@@ -71,10 +96,22 @@ const companyCharts = {
                 }
             },
             scales: {
-                y: {
-                    beginAtZero: true
-                }
+                yAxes: [{
+                    ticks: {
+                        callback: function(value, index, values) {
+                            return '€' + formatNumber(value);
+                        }
+                    }
+                }]
             },
+            tooltips: {
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                        const transformedValue = formatNumber(tooltipItem.yLabel);
+                        return data.datasets[tooltipItem.datasetIndex].label + ': €' + transformedValue;
+                    }
+                }
+            }
         }
     })
 }
@@ -113,7 +150,8 @@ function updateCompanyCharts(resCharts) {
             label: dataset.label,
             data: dataset.data,
             backgroundColor: `rgba(${dataset.backgroundColor.r}, ${dataset.backgroundColor.g}, ${dataset.backgroundColor.b}, 0.2)`,
-            borderColor: `rgba(${dataset.backgroundColor.r}, ${dataset.backgroundColor.g}, ${dataset.backgroundColor.b}, 1)`
+            borderColor: `rgba(${dataset.backgroundColor.r}, ${dataset.backgroundColor.g}, ${dataset.backgroundColor.b}, 1)`,
+            tension: 0.3
         })
     })
     companyCharts.cropCost.update();
