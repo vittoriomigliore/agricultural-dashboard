@@ -1,17 +1,19 @@
-package it.vittoriomigliore.agriculturaldashboard.livedata.chart.fieldchart;
+package it.vittoriomigliore.agriculturaldashboard.livedata.chart.common;
 
-import it.vittoriomigliore.agriculturaldashboard.livedata.chart.ChartDatasetDto;
+import it.vittoriomigliore.agriculturaldashboard.core.util.Utils;
 
+import java.awt.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FieldDatasetDto implements ChartDatasetDto {
+public class BaseDatasetDto implements IDatasetDto {
     String label;
     List<BigDecimal> data;
 
-    public FieldDatasetDto(String label) {
+    public BaseDatasetDto(String label) {
         this.label = label;
         data = new ArrayList<>();
     }
@@ -28,7 +30,13 @@ public class FieldDatasetDto implements ChartDatasetDto {
 
     @Override
     public Map<String, Integer> getBackgroundColor() {
-        return null;
+        Color color = Utils.getColorFromString(label);
+
+        Map<String, Integer> rgb = new HashMap<>();
+        rgb.put("r", color.getRed());
+        rgb.put("g", color.getGreen());
+        rgb.put("b", color.getBlue());
+        return rgb;
     }
 
     @Override

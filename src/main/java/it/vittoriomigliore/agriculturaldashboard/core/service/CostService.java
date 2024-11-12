@@ -1,8 +1,8 @@
 package it.vittoriomigliore.agriculturaldashboard.core.service;
 
 import it.vittoriomigliore.agriculturaldashboard.core.entity.Cost;
+import it.vittoriomigliore.agriculturaldashboard.core.entity.Crop;
 import it.vittoriomigliore.agriculturaldashboard.core.repository.CostRepository;
-import it.vittoriomigliore.agriculturaldashboard.core.util.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.Year;
 
 @Service
 public class CostService {
@@ -33,6 +35,14 @@ public class CostService {
     public BigDecimal costsSumTo10DaysAgo() {
         LocalDate tenDaysAgo = LocalDate.now().minusDays(10);
         return costRepository.sumCostsByDateBefore(tenDaysAgo);
+    }
+
+    public BigDecimal costsSumByCropAndMonth(Crop crop, Month month) {
+        int currentYear = LocalDate.now().getYear();
+        Year currentYearObject = Year.of(currentYear);
+        LocalDate startDate = LocalDate.of(currentYear, month, 1);
+        LocalDate endDate = LocalDate.of(currentYear, month, month.length(currentYearObject.isLeap()));
+        return costRepository.sumCostsByCropAndDateBetween(crop, startDate, endDate);
     }
 
 }

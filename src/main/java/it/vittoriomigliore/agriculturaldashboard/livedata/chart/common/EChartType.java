@@ -1,20 +1,14 @@
-package it.vittoriomigliore.agriculturaldashboard.livedata.chart;
+package it.vittoriomigliore.agriculturaldashboard.livedata.chart.common;
 
 public enum EChartType {
-    TEMPERATURE("temperature"),
-    HUMIDITY("humidity"),
-    WIND_SPEED("windSpeed"),
-    PRECIPITATION("precipitation"),
-    IRRIGATION("irrigation"),
-    COST("cost"),
-    CROP_PRODUCTION("production"),
-    SALES("sales");
-
-    private final String value;
-
-    EChartType(String value) {
-        this.value = value;
-    }
+    TEMPERATURE,
+    HUMIDITY,
+    WIND_SPEED,
+    PRECIPITATION,
+    IRRIGATION,
+    CROP_COST,
+    CROP_PRODUCTION,
+    PRODUCTION_VS_SALES;
 
     public String getValue() {
         return switch (this) {
@@ -23,9 +17,9 @@ public enum EChartType {
             case WIND_SPEED -> "windSpeed";
             case PRECIPITATION -> "precipitation";
             case IRRIGATION -> "irrigation";
-            case COST -> "cost";
+            case CROP_COST -> "crop-cost";
             case CROP_PRODUCTION -> "crop-production";
-            case SALES -> "sales";
+            case PRODUCTION_VS_SALES -> "production-vs-sales";
         };
     }
 
@@ -36,9 +30,9 @@ public enum EChartType {
             case WIND_SPEED -> "Wind Speed (km/h)";
             case PRECIPITATION -> "Precipitation (mm)";
             case IRRIGATION -> "Irrigation Volume (L)";
-            case COST -> "Cost";
+            case CROP_COST -> "Cost";
             case CROP_PRODUCTION -> "Production";
-            case SALES -> "Sales";
+            case PRODUCTION_VS_SALES -> "Sales";
         };
     }
 

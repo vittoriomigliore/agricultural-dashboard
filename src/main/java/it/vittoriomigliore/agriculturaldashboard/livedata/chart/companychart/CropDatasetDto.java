@@ -1,8 +1,7 @@
 package it.vittoriomigliore.agriculturaldashboard.livedata.chart.companychart;
 
 import it.vittoriomigliore.agriculturaldashboard.core.entity.Crop;
-import it.vittoriomigliore.agriculturaldashboard.core.util.Utils;
-import it.vittoriomigliore.agriculturaldashboard.livedata.chart.ChartDatasetDto;
+import it.vittoriomigliore.agriculturaldashboard.livedata.chart.common.IDatasetDto;
 
 import java.awt.*;
 import java.math.BigDecimal;
@@ -11,11 +10,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CompanyDatasetDto implements ChartDatasetDto {
+public class CropDatasetDto implements IDatasetDto {
     Crop crop;
     List<BigDecimal> data;
 
-    public CompanyDatasetDto(Crop crop) {
+    public CropDatasetDto(Crop crop) {
         this.crop = crop;
         this.data = new ArrayList<>();
     }

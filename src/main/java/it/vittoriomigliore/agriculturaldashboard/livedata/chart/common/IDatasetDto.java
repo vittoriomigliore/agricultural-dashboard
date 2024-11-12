@@ -1,10 +1,10 @@
-package it.vittoriomigliore.agriculturaldashboard.livedata.chart;
+package it.vittoriomigliore.agriculturaldashboard.livedata.chart.common;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
-public interface ChartDatasetDto {
+public interface IDatasetDto {
 
     void addValue(BigDecimal value);
 

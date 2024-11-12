@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 public interface SaleRepository extends JpaRepository<Sale, Integer> {
 
@@ -16,4 +17,7 @@ public interface SaleRepository extends JpaRepository<Sale, Integer> {
 
     @Query("SELECT COALESCE(SUM(c.quantitySold * c.salePricePerUnit), 0) FROM Sale c WHERE c.date = :date")
     BigDecimal sumSalesByDate(@Param("date") LocalDate date);
+
+    @Query("SELECT COALESCE(SUM(c.quantitySold * c.salePricePerUnit), 0) FROM Sale c WHERE c.date BETWEEN :startDate AND :endDate")
+    BigDecimal sumSalesByDateBetween(LocalDate startDate, LocalDate endDate);
 }

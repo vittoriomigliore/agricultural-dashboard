@@ -35,4 +35,12 @@ public class ProductionService {
     public Production getLastProductionByCrop(Crop crop) {
         return productionRepository.findFirstByCropOrderByHarvestDateDesc(crop);
     }
+
+    public List<Production> getAllProductionsByMonth(Month month) {
+        int currentYear = LocalDate.now().getYear();
+        Year currentYearObject = Year.of(currentYear);
+        LocalDate startDate = LocalDate.of(currentYear, month, 1);
+        LocalDate endDate = LocalDate.of(currentYear, month, month.length(currentYearObject.isLeap()));
+        return productionRepository.findAllByHarvestDateBetween(startDate, endDate);
+    }
 }

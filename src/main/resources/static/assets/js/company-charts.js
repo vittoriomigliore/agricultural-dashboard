@@ -23,7 +23,7 @@ const companyCharts = {
             },
         }
     }),
-    sales: new Chart(document.getElementById('sales'), {
+    productionVsSales: new Chart(document.getElementById('sales'), {
         type: 'bar',
         data: {
             labels: [],
@@ -57,66 +57,23 @@ const companyCharts = {
             }
         }
     }),
-    costs: new Chart(document.getElementById('costs'), {
+    cropCost: new Chart(document.getElementById('costs'), {
         type: 'line',
         data: {
             labels: [],
-            datasets: [
-                {
-                    label: '',
-                    data: [],
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    tension: 0.3,
-                },
-                {
-                    label: '',
-                    data: [900, 850, 800, 950],
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    tension: 0.3,
-                },
-                {
-                    label: '',
-                    data: [1100, 1150, 1200, 1180],
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    tension: 0.3,
-                },
-                {
-                    label: '',
-                    data: [700, 750, 720, 780],
-                    borderColor: 'rgba(255, 206, 86, 1)',
-                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
-                    tension: 0.3,
-                },
-            ],
+            datasets: [],
         },
         options: {
             responsive: true,
             plugins: {
                 legend: {
-                    position: 'top',
-                },
-                title: {
-                    display: true,
-                    text: 'Cost Trends per Crop',
-                },
+                    position: 'top'
+                }
             },
             scales: {
                 y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Cost (Currency)',
-                    },
-                },
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Time Period',
-                    },
-                },
+                    beginAtZero: true
+                }
             },
         }
     })
@@ -134,4 +91,30 @@ function updateCompanyCharts(resCharts) {
         })
     })
     companyCharts.cropProduction.update();
+
+    var resProductionVsSales = resCharts.find((c) => c.chartType === 'production-vs-sales');
+    companyCharts.productionVsSales.data.labels = convertDateTimesToChartLabels(resProductionVsSales.dateTimes, 'month');
+    companyCharts.productionVsSales.data.datasets = [];
+    resProductionVsSales.datasets.forEach((dataset) => {
+        companyCharts.productionVsSales.data.datasets.push({
+            label: dataset.label,
+            data: dataset.data,
+            backgroundColor: `rgba(${dataset.backgroundColor.r}, ${dataset.backgroundColor.g}, ${dataset.backgroundColor.b}, 0.8)`
+        })
+    })
+    companyCharts.productionVsSales.update();
+
+    var resCropCosts = resCharts.find((c) => c.chartType === 'crop-cost');
+    companyCharts.cropCost.data.labels = convertDateTimesToChartLabels(resCropCosts.dateTimes, 'month');
+    companyCharts.cropCost.data.datasets = [];
+    console.log(resCropCosts)
+    resCropCosts.datasets.forEach((dataset) => {
+        companyCharts.cropCost.data.datasets.push({
+            label: dataset.label,
+            data: dataset.data,
+            backgroundColor: `rgba(${dataset.backgroundColor.r}, ${dataset.backgroundColor.g}, ${dataset.backgroundColor.b}, 0.2)`,
+            borderColor: `rgba(${dataset.backgroundColor.r}, ${dataset.backgroundColor.g}, ${dataset.backgroundColor.b}, 1)`
+        })
+    })
+    companyCharts.cropCost.update();
 }

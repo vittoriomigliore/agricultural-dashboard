@@ -1,4 +1,4 @@
-package it.vittoriomigliore.agriculturaldashboard.livedata.chart;
+package it.vittoriomigliore.agriculturaldashboard.livedata.chart.common;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

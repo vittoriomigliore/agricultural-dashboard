@@ -12,4 +12,6 @@ public interface ProductionRepository extends JpaRepository<Production, Integer>
     List<Production> findAllByCropAndHarvestDateBetween(Crop crop, LocalDate startDate, LocalDate endDate);
 
     Production findFirstByCropOrderByHarvestDateDesc(Crop crop);
+
+    List<Production> findAllByHarvestDateBetween(LocalDate startDate, LocalDate endDate);
 }

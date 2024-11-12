@@ -3,7 +3,7 @@ package it.vittoriomigliore.agriculturaldashboard.livedata.chart.fieldchart;
 import it.vittoriomigliore.agriculturaldashboard.core.entity.Field;
 import it.vittoriomigliore.agriculturaldashboard.core.entity.Irrigation;
 import it.vittoriomigliore.agriculturaldashboard.core.entity.Weather;
-import it.vittoriomigliore.agriculturaldashboard.livedata.chart.EChartType;
+import it.vittoriomigliore.agriculturaldashboard.livedata.chart.common.EChartType;
 
 import java.util.HashMap;
 import java.util.List;
