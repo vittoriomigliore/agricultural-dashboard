@@ -1,30 +1,55 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <footer class="footer" th:fragment="footer">
-    <div class="container-fluid d-flex justify-content-between">
-        <nav class="pull-left">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+        <nav class="nav">
             <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="http://www.themekita.com">
-                        ThemeKita
+                    <a class="nav-link" href="https://vittoriomigliore.github.io/" target="_blank">
+                        <i class="fas fa-globe"></i> Profile
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"> Help </a>
+                    <a class="nav-link" href="https://www.linkedin.com/in/vittoriomigliore/" target="_blank">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"> Licenses </a>
+                    <a class="nav-link" href="https://github.com/vittoriomigliore" target="_blank">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/vittoriomigliore/agricultural-dashboard" target="_blank">
+                        <i class="fas fa-code-branch"></i> Project Repo
+                    </a>
+                </li>
+                <li class="nav-item position-relative">
+                    <span class="nav-link">
+                        <i class="fas fa-info-circle"></i> About
+                    </span>
+                    <div class="position-absolute bg-dark text-white p-2 rounded small" style="bottom: 125%; left: 50%; transform: translateX(-50%); width: 200px; display: none; z-index: 1;">
+                        <p class="mb-0">Built for my university final project.<br>Reach out if you'd like to know how it went!</p>
+                    </div>
                 </li>
             </ul>
         </nav>
-        <div class="copyright">
-            2024, made with <i class="fa fa-heart heart text-danger"></i> by
-            <a href="http://www.themekita.com">ThemeKita</a>
-        </div>
-        <div>
-            Distributed by
-            <a target="_blank" href="https://themewagon.com/">ThemeWagon</a>.
+        <div class="text-muted small">
+            © 2024 | Fueled by late nights 🌙 and a love for code 💻. Crafted by <a href="https://vittoriomigliore.github.io/" target="_blank">Vittorio Migliore</a>
         </div>
     </div>
+
+    <script>
+        const aboutItem = document.querySelector('.nav-item.position-relative');
+        const popup = aboutItem.querySelector('.position-absolute');
+
+        aboutItem.addEventListener('mouseenter', () => {
+            popup.style.display = 'block';
+        });
+
+        aboutItem.addEventListener('mouseleave', () => {
+            popup.style.display = 'none';
+        });
+    </script>
 </footer>
 </html>
