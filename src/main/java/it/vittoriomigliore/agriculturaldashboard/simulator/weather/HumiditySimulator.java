@@ -1,10 +1,8 @@
 package it.vittoriomigliore.agriculturaldashboard.simulator.weather;
 
 import it.vittoriomigliore.agriculturaldashboard.simulator.BaseMetricSimulator;
-import it.vittoriomigliore.agriculturaldashboard.simulator.DistributionUtils;
+import it.vittoriomigliore.agriculturaldashboard.simulator.utils.DistributionUtils;
 import org.springframework.stereotype.Component;
-
-import java.util.Random;
 
 @Component
 public class HumiditySimulator implements BaseMetricSimulator {

@@ -1,7 +1,6 @@
-package it.vittoriomigliore.agriculturaldashboard.simulator.metric;
+package it.vittoriomigliore.agriculturaldashboard.simulator;
 
-import it.vittoriomigliore.agriculturaldashboard.simulator.BaseMetricSimulator;
-import it.vittoriomigliore.agriculturaldashboard.simulator.DistributionUtils;
+import it.vittoriomigliore.agriculturaldashboard.simulator.utils.DistributionUtils;
 import org.springframework.stereotype.Component;
 
 @Component

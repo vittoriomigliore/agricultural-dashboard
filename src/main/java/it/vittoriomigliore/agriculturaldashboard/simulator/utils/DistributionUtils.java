@@ -1,4 +1,4 @@
-package it.vittoriomigliore.agriculturaldashboard.simulator;
+package it.vittoriomigliore.agriculturaldashboard.simulator.utils;
 
 import java.util.Random;
 

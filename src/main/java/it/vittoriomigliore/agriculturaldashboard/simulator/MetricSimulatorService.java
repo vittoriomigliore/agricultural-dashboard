@@ -1,4 +1,4 @@
-package it.vittoriomigliore.agriculturaldashboard.simulator.metric;
+package it.vittoriomigliore.agriculturaldashboard.simulator;
 
 import it.vittoriomigliore.agriculturaldashboard.core.entity.*;
 import it.vittoriomigliore.agriculturaldashboard.core.service.*;
