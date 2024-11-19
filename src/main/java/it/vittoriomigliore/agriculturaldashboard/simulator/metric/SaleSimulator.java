@@ -4,22 +4,19 @@ import it.vittoriomigliore.agriculturaldashboard.simulator.BaseMetricSimulator;
 import it.vittoriomigliore.agriculturaldashboard.simulator.DistributionUtils;
 import org.springframework.stereotype.Component;
 
-import java.util.Random;
-
 @Component
-public class CostSimulator implements BaseMetricSimulator {
-    private double mean;
-    private double standardDeviation;
+public class SaleSimulator implements BaseMetricSimulator {
+
+    private double lambda; // Average rate of sales
 
     @Override
     public void setParameters(double... parameters) {
-        this.mean = parameters[0];
-        this.standardDeviation = parameters[1];
+        this.lambda = parameters[0]; // Expecting lambda to be passed
     }
 
     @Override
-    public Double simulate() {
-        return DistributionUtils.generateGaussian(mean, standardDeviation);
+    public Integer simulate() {
+        return DistributionUtils.generatePoisson(lambda);
     }
 }
 

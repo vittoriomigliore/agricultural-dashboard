@@ -1,21 +1,22 @@
 package it.vittoriomigliore.agriculturaldashboard.simulator.metric;
 
-import it.vittoriomigliore.agriculturaldashboard.simulator.SimulatorUtils;
+import it.vittoriomigliore.agriculturaldashboard.simulator.BaseMetricSimulator;
+import it.vittoriomigliore.agriculturaldashboard.simulator.DistributionUtils;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProductionSimulator {
-    private double averageProduction;
+public class ProductionSimulator implements BaseMetricSimulator {
+    private double mean;
+    private double standardDeviation;
 
-    public ProductionSimulator() {
+    @Override
+    public void setParameters(double... parameters) {
+        this.mean = parameters[0];
+        this.standardDeviation = parameters[1];
     }
 
-    public void init(double averageProduction) {
-        this.averageProduction = averageProduction;
-    }
-
-    // Simulate daily production quantity using a Poisson distribution
-    public int simulateDailyProduction() {
-        return SimulatorUtils.poisson(averageProduction);
+    @Override
+    public Double simulate() {
+        return DistributionUtils.generateGaussian(mean, standardDeviation);
     }
 }

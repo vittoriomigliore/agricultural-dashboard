@@ -11,6 +11,10 @@ import java.time.LocalDate;
 
 public interface ProductionRepository extends JpaRepository<Production, Integer> {
 
+    long countByFieldAndHarvestDate(Field field, LocalDate date);
+
+    Production findFirstByFieldAndHarvestDate(Field field, LocalDate date);
+
     Production findFirstByFieldOrderByHarvestDateDesc(Field field);
 
     @Query("SELECT COALESCE(SUM(c.quantity), 0) FROM Production c WHERE (:field IS NULL OR c.field = :field) AND c.harvestDate BETWEEN :startDate AND :endDate")

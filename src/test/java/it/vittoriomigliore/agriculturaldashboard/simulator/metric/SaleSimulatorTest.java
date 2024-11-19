@@ -6,18 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class IrrigationSimulatorTest extends BaseMetricSimulatorTest {
+public class SaleSimulatorTest extends BaseMetricSimulatorTest {
 
     @Autowired
-    private IrrigationSimulator irrigationSimulator;
+    private SaleSimulator saleSimulator;
 
     @BeforeEach
     public void setup() {
-        simulator = irrigationSimulator;
+        simulator = saleSimulator;
     }
 
     @Override
     protected double[] getTestParameters() {
-        return new double[]{20};
+        return new double[]{2.0};
     }
 }

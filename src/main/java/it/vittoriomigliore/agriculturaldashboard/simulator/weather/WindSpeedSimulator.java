@@ -1,44 +1,23 @@
 package it.vittoriomigliore.agriculturaldashboard.simulator.weather;
 
+import it.vittoriomigliore.agriculturaldashboard.simulator.BaseMetricSimulator;
+import it.vittoriomigliore.agriculturaldashboard.simulator.DistributionUtils;
 import org.springframework.stereotype.Component;
 
-import java.util.Random;
-
 @Component
-public class WindSpeedSimulator {
-    private final Random random;
-    private double dailyMeanWindSpeed;
+public class WindSpeedSimulator implements BaseMetricSimulator {
+    private double mean;
+    private double standardDeviation;
 
-    // Constructor
-    public WindSpeedSimulator() {
-        this.random = new Random();
+    @Override
+    public void setParameters(double... parameters) {
+        this.mean = parameters[0];
+        this.standardDeviation = parameters[1];
     }
 
-    // Generate daily mean wind speed using Weibull distribution
-    public void generateDailyMeanWindSpeed(double shape, double scale) {
-        this.dailyMeanWindSpeed = generateWeibullSample(shape, scale);
-    }
-
-    // Simulate wind speed for a given minute, adding small fluctuation
-    public double simulateWindSpeedForMinute() {
-        // Add some fluctuation based on Gaussian distribution
-        double fluctuation = random.nextGaussian() * 0.5; // Small fluctuation (std dev of 0.5)
-        double windSpeed = dailyMeanWindSpeed + fluctuation;
-
-        // Ensure the wind speed is non-negative
-        return Math.max(0.0, windSpeed);
-    }
-
-    // Generate a sample from a Weibull distribution
-    private double generateWeibullSample(double k, double lambda) {
-        // Inverse transform sampling for Weibull distribution
-        double u = random.nextDouble();
-        return lambda * Math.pow(-Math.log(1 - u), 1 / k);
-    }
-
-    // Getters for testing
-    public double getDailyMeanWindSpeed() {
-        return dailyMeanWindSpeed;
+    @Override
+    public Double simulate() {
+        return DistributionUtils.generateGaussian(mean, standardDeviation);
     }
 }
 

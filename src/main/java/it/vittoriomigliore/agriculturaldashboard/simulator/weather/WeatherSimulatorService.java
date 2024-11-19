@@ -14,10 +14,6 @@ import java.util.List;
 @Service
 public class WeatherSimulatorService {
 
-    private static final double WIND_SPEED_SHAPE = 2.0;
-    private static final double WIND_SPEED_SCALE = 10.0;
-    private static final double HUMIDITY_ALPHA = 2.0;
-    private static final double HUMIDITY_BETA = 5.0;
     private final FieldService fieldService;
     private final WeatherService weatherService;
     private final HumiditySimulator humiditySimulator;
@@ -25,22 +21,26 @@ public class WeatherSimulatorService {
     private final TemperatureSimulator temperatureSimulator;
     private final WindSpeedSimulator windSpeedSimulator;
 
-    public WeatherSimulatorService(FieldService fieldService, WeatherService weatherService, HumiditySimulator humiditySimulator, RainSimulator rainSimulator, TemperatureSimulator temperatureSimulator, WindSpeedSimulator windSpeedSimulator) {
+    public WeatherSimulatorService(FieldService fieldService,
+                                   WeatherService weatherService,
+                                   HumiditySimulator humiditySimulator,
+                                   RainSimulator rainSimulator,
+                                   TemperatureSimulator temperatureSimulator,
+                                   WindSpeedSimulator windSpeedSimulator) {
         this.fieldService = fieldService;
         this.weatherService = weatherService;
         this.humiditySimulator = humiditySimulator;
         this.rainSimulator = rainSimulator;
         this.temperatureSimulator = temperatureSimulator;
         this.windSpeedSimulator = windSpeedSimulator;
-        initializeDailyWeather();
+        initializeSimulators();
     }
 
-    @Scheduled(cron = "0 0 2 * * ?") // Runs every day at 2:00 AM
-    public void initializeDailyWeather() {
-        humiditySimulator.generateDailyMeanHumidity(HUMIDITY_ALPHA, HUMIDITY_BETA);
-        rainSimulator.generateDailyRainProbability();
-        temperatureSimulator.generateDailyTemperatureParameters();
-        windSpeedSimulator.generateDailyMeanWindSpeed(WIND_SPEED_SHAPE, WIND_SPEED_SCALE);
+    public void initializeSimulators() {
+        temperatureSimulator.setParameters(15.0, 2.0);
+        humiditySimulator.setParameters(70.0, 10.0);
+        rainSimulator.setParameters(1 / 0.5);
+        windSpeedSimulator.setParameters(10, 3);
     }
 
     @Scheduled(fixedRateString = "${simulator.weather.rate}")
@@ -55,13 +55,13 @@ public class WeatherSimulatorService {
         weather.setField(field);
         weather.setDateTime(LocalDateTime.now());
 
-        BigDecimal humidity = BigDecimal.valueOf(humiditySimulator.simulateHumidityForMinute());
-        BigDecimal precipitation = BigDecimal.valueOf(rainSimulator.simulatePrecipitationPerMinute());
-        BigDecimal temperature = BigDecimal.valueOf(temperatureSimulator.simulateTemperatureForMinute());
-        BigDecimal windSpeed = BigDecimal.valueOf(windSpeedSimulator.simulateWindSpeedForMinute());
-        weather.setHumidity(humidity);
-        weather.setPrecipitation(precipitation);
+        BigDecimal temperature = BigDecimal.valueOf(temperatureSimulator.simulate());
+        BigDecimal humidity = BigDecimal.valueOf(humiditySimulator.simulate());
+        BigDecimal rain = BigDecimal.valueOf(rainSimulator.simulate());
+        BigDecimal windSpeed = BigDecimal.valueOf(windSpeedSimulator.simulate());
         weather.setTemperature(temperature);
+        weather.setHumidity(humidity);
+        weather.setPrecipitation(rain);
         weather.setWindSpeed(windSpeed);
 
         weatherService.createWeather(weather);

@@ -1,6 +1,5 @@
 package it.vittoriomigliore.agriculturaldashboard.core.service;
 
-import it.vittoriomigliore.agriculturaldashboard.core.entity.Crop;
 import it.vittoriomigliore.agriculturaldashboard.core.entity.Field;
 import it.vittoriomigliore.agriculturaldashboard.core.entity.Production;
 import it.vittoriomigliore.agriculturaldashboard.core.repository.ProductionRepository;
@@ -11,7 +10,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
-import java.util.List;
 
 @Service
 public class ProductionService {
@@ -26,11 +24,19 @@ public class ProductionService {
         return productionRepository.save(production);
     }
 
+    public Boolean existsProductionByFieldAndHarvestDate(Field field, LocalDate date) {
+        return productionRepository.countByFieldAndHarvestDate(field, date) > 0;
+    }
+
+    public Production getProductionByFieldAndHarvestDate(Field field, LocalDate date) {
+        return productionRepository.findFirstByFieldAndHarvestDate(field, date);
+    }
+
     public Production getLastProductionByField(Field field) {
         return productionRepository.findFirstByFieldOrderByHarvestDateDesc(field);
     }
 
-    public BigDecimal productionSumByFieldAndMonth(Field field, Month month){
+    public BigDecimal productionSumByFieldAndMonth(Field field, Month month) {
         int currentYear = LocalDate.now().getYear();
         Year currentYearObject = Year.of(currentYear);
         LocalDate startDate = LocalDate.of(currentYear, month, 1);
@@ -38,7 +44,7 @@ public class ProductionService {
         return productionRepository.sumProductionByFieldAndHarvestDateBetween(field, startDate, endDate);
     }
 
-    public BigDecimal productionSumByMonth(Month month){
+    public BigDecimal productionSumByMonth(Month month) {
         int currentYear = LocalDate.now().getYear();
         Year currentYearObject = Year.of(currentYear);
         LocalDate startDate = LocalDate.of(currentYear, month, 1);

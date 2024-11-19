@@ -1,27 +1,22 @@
 package it.vittoriomigliore.agriculturaldashboard.simulator.metric;
 
+import it.vittoriomigliore.agriculturaldashboard.simulator.BaseMetricSimulator;
+import it.vittoriomigliore.agriculturaldashboard.simulator.DistributionUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.Random;
 
 @Component
-public class IrrigationSimulator {
-    private double meanIrrigation; // The average irrigation volume per day (liters per hectare)
-    private double stdDevIrrigation; // The standard deviation for irrigation variability
-    private final Random random;
+public class IrrigationSimulator implements BaseMetricSimulator {
+    private double lambda;
 
-    public IrrigationSimulator() {
-        this.random = new Random();
+    @Override
+    public void setParameters(double... parameters) {
+        this.lambda = parameters[0];
     }
 
-    public void init(double meanIrrigation, double stdDevIrrigation) {
-        this.meanIrrigation = meanIrrigation;
-        this.stdDevIrrigation = stdDevIrrigation;
-    }
-
-    // Simulate daily irrigation using a normal distribution
-    public double simulateDailyIrrigation() {
-        // Generate a random value from a normal distribution
-        return meanIrrigation + stdDevIrrigation * random.nextGaussian();
+    @Override
+    public Double simulate() {
+        return DistributionUtils.generateExponential(lambda);
     }
 }
