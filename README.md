@@ -2,58 +2,64 @@
 
 ## Description
 
-This project focuses on developing an interactive dashboard for analyzing business performance in the agricultural
-sector. The dashboard is designed to help agricultural businesses monitor key metrics, optimize resources, and enhance
-sustainability by leveraging real-time data integration and visualization.
+This project is a prototype developed as part of my university final project, aiming to provide an intuitive platform for monitoring and analyzing key metrics in the agricultural sector.  
+Designed with small to medium-sized farms in mind, it helps businesses track crop performance, resource usage, and environmental conditions.  
+The primary goal is to improve decision-making by presenting data in a clear and actionable format.  
+Through real-time data simulation and visualization, the platform allows users to explore insights that can enhance productivity and sustainability.  
+Though still in its early stages, it lays the groundwork for more interactive features and real-world applications.
 
 ## Features
 
 - **Real-Time Data Visualization**: Displays real-time metrics such as crop yield, resource usage, and environmental
   conditions.
-- **Dynamic Interaction**: Users can interact with the dashboard to filter and analyze data based on specific criteria.
 - **Data Simulation**: Includes a data simulator to generate random environmental and production data for analysis.
-- **User-Friendly Interface**: Designed with principles of user experience in mind, making it accessible for
-  non-technical users.
 
 ## Technologies Used
 
 - **Java 17**
 - **Spring Boot 3.3.0**
-- **H2 Database** (for development)
-- **Thymeleaf** (for templating)
-- **Bootstrap** (for responsive UI)
+- **Thymeleaf**
+- **Bootstrap**
+- **Liquibase**
+- **H2 Database**
+- **Gradle**
 
-### Installation
+### Installation and Setup
 
 1. Clone the repository:
    ```bash
    git clone https://github.com/vittoriomigliore/agricultural-dashboard.git
    cd agricultural-dashboard
    ```
-2. Configure the database connection in `application.properties`.
-3. Create the required tables in MySQL using the provided SQL scripts.
-4. Build the project using Maven:
+2. Configure the database:  
+   By default, the application uses H2 Database for development.  
+   To use a different database, modify the connection settings in `application.properties` accordingly.
+3. Set up the database schema:  
+   The application uses Liquibase for database migration. On application startup, Liquibase will automatically apply the necessary schema changes.
+4. Build the project:
    ```bash
-   mvn clean install
+   ./gradlew build
    ```
-5. Run the Spring Boot application:
+5. Run the application:
    ```bash
-   mvn spring-boot:run
+   ./gradlew bootRun
+   ```
+6. Access the dashboard:
+   Open a web browser and navigate to:  
+   ```
+   http://localhost:8080
    ```
 
-### Accessing the Dashboard
-
-Once the application is running, access the dashboard by navigating to:
-
-```
-http://localhost:8080
-```
+### Potential Applications
+- **Small to Medium-Sized Farms**: Enables agricultural SMEs to digitize and monitor their operations with minimal investment.
+- **Prototype and Research Tool**: Serves as a testbed for experimenting with agricultural innovations, such as new cultivation techniques or business models. 
+- **Educational Platform**: Provides a learning environment for agricultural students or practitioners interested in data-driven farming.
 
 ## Future Improvements
 
-- Integrate external data sources for weather information.
-- Implement user authentication and role management.
-- Enhance data visualization with more interactive charts and graphs.
+- **Interactive Features**: Enable users to interact with the dashboard, filter data, and customize visualizations. 
+- **Data Source Integration**: Incorporate external APIs for weather forecasts, soil moisture levels, and other agronomic data. 
+- **User Authentication**: Add secure user authentication and role-based access to ensure data protection.
 
 ## Contributing
 
@@ -70,3 +76,7 @@ open an issue or submit a pull request.
 4. Push to the branch:  
    `git push origin feature/your-feature`
 5. Open a pull request.
+
+## License
+
+This project is licensed under the MIT License.
