@@ -1,7 +1,11 @@
-package it.vittoriomigliore.agriculturaldashboard.simulator;
+package it.vittoriomigliore.agriculturaldashboard.simulator.service;
 
 import it.vittoriomigliore.agriculturaldashboard.core.entity.*;
 import it.vittoriomigliore.agriculturaldashboard.core.service.*;
+import it.vittoriomigliore.agriculturaldashboard.simulator.CostSimulator;
+import it.vittoriomigliore.agriculturaldashboard.simulator.IrrigationSimulator;
+import it.vittoriomigliore.agriculturaldashboard.simulator.ProductionSimulator;
+import it.vittoriomigliore.agriculturaldashboard.simulator.SaleSimulator;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class MetricSimulatorService {
+public class MainSimulatorService {
 
     private final FieldService fieldService;
     private final CostService costService;
@@ -23,15 +27,15 @@ public class MetricSimulatorService {
     private final ProductionSimulator productionSimulator;
     private final SaleSimulator saleSimulator;
 
-    MetricSimulatorService(FieldService fieldService,
-                           CostService costService,
-                           IrrigationService irrigationService,
-                           ProductionService productionService,
-                           SaleService saleService,
-                           CostSimulator costSimulator,
-                           IrrigationSimulator irrigationSimulator,
-                           ProductionSimulator productionSimulator,
-                           SaleSimulator saleSimulator) {
+    MainSimulatorService(FieldService fieldService,
+                         CostService costService,
+                         IrrigationService irrigationService,
+                         ProductionService productionService,
+                         SaleService saleService,
+                         CostSimulator costSimulator,
+                         IrrigationSimulator irrigationSimulator,
+                         ProductionSimulator productionSimulator,
+                         SaleSimulator saleSimulator) {
         this.fieldService = fieldService;
         this.costService = costService;
         this.irrigationService = irrigationService;

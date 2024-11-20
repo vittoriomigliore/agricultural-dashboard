@@ -1,13 +1,13 @@
-package it.vittoriomigliore.agriculturaldashboard.simulator;
+package it.vittoriomigliore.agriculturaldashboard.simulator.service;
 
 import it.vittoriomigliore.agriculturaldashboard.core.entity.Field;
 import it.vittoriomigliore.agriculturaldashboard.core.entity.Weather;
 import it.vittoriomigliore.agriculturaldashboard.core.service.FieldService;
 import it.vittoriomigliore.agriculturaldashboard.core.service.WeatherService;
-import it.vittoriomigliore.agriculturaldashboard.simulator.weather.HumiditySimulator;
-import it.vittoriomigliore.agriculturaldashboard.simulator.weather.RainSimulator;
-import it.vittoriomigliore.agriculturaldashboard.simulator.weather.TemperatureSimulator;
-import it.vittoriomigliore.agriculturaldashboard.simulator.weather.WindSpeedSimulator;
+import it.vittoriomigliore.agriculturaldashboard.simulator.HumiditySimulator;
+import it.vittoriomigliore.agriculturaldashboard.simulator.RainSimulator;
+import it.vittoriomigliore.agriculturaldashboard.simulator.TemperatureSimulator;
+import it.vittoriomigliore.agriculturaldashboard.simulator.WindSpeedSimulator;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 

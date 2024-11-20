@@ -1,6 +1,5 @@
-package it.vittoriomigliore.agriculturaldashboard.simulator.weather;
+package it.vittoriomigliore.agriculturaldashboard.simulator;
 
-import it.vittoriomigliore.agriculturaldashboard.simulator.BaseMetricSimulatorTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

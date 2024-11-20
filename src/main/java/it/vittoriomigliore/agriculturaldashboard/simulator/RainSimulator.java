@@ -1,6 +1,5 @@
-package it.vittoriomigliore.agriculturaldashboard.simulator.weather;
+package it.vittoriomigliore.agriculturaldashboard.simulator;
 
-import it.vittoriomigliore.agriculturaldashboard.simulator.BaseMetricSimulator;
 import it.vittoriomigliore.agriculturaldashboard.simulator.util.DistributionUtils;
 import org.springframework.stereotype.Component;
 

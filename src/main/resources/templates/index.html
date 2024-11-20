@@ -131,9 +131,9 @@
 <script th:inline="javascript">
     const fieldIds = [[${fieldIdList}]]
 </script>
-<script th:src="@{assets/js/counters.js}"></script>
-<script th:src="@{assets/js/field-charts.js}"></script>
-<script th:src="@{assets/js/company-charts.js}"></script>
+<script th:src="@{assets/js/livedata/counters.js}"></script>
+<script th:src="@{assets/js/livedata/field-charts.js}"></script>
+<script th:src="@{assets/js/livedata/company-charts.js}"></script>
 <script th:inline="javascript">
     let wsUrlCharts = getWebSocketUrl("charts-live-data");
     const socketCharts = new WebSocket(wsUrlCharts)

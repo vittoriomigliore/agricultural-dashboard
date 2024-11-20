@@ -1,11 +1,10 @@
-package it.vittoriomigliore.agriculturaldashboard.simulator.weather;
+package it.vittoriomigliore.agriculturaldashboard.simulator;
 
-import it.vittoriomigliore.agriculturaldashboard.simulator.BaseMetricSimulator;
 import it.vittoriomigliore.agriculturaldashboard.simulator.util.DistributionUtils;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TemperatureSimulator implements BaseMetricSimulator {
+public class HumiditySimulator implements BaseMetricSimulator {
     private double mean;
     private double standardDeviation;
 
