@@ -36,15 +36,14 @@ public class CompanyBuilder {
 
         List<Field> fields = fieldService.getAllFields();
 
-        Month currentMonth = LocalDate.now().getMonth();
-        List<Month> months = List.of(currentMonth.minus(3), currentMonth.minus(2), currentMonth.minus(1), currentMonth);
+        LocalDate currentDate = LocalDate.now().atStartOfDay().toLocalDate();
+        List<LocalDate> dates = List.of(currentDate.minusDays(3), currentDate.minusDays(2), currentDate.minusDays(1), currentDate);
 
-        for (Month month : months) {
-            LocalDateTime firstDayOfMonth = LocalDateTime.of(LocalDate.now().getYear(), month.getValue(), 1, 0, 0);
-            cropProductionChart.addDateTime(firstDayOfMonth);
+        for (LocalDate date : dates) {
+            cropProductionChart.addDateTime(date.atStartOfDay());
 
             for (Field field : fields) {
-                BigDecimal monthCropProduction = productionService.productionSumByFieldAndMonth(field, month);
+                BigDecimal monthCropProduction = productionService.productionSumByFieldAndDate(field, date);
                 cropProductionChart.addValue(field.getCrop(), monthCropProduction);
             }
         }

@@ -118,7 +118,7 @@ const companyCharts = {
 
 function updateCompanyCharts(resCharts) {
     var resCropProduction = resCharts.find((c) => c.chartType === 'crop-production');
-    companyCharts.cropProduction.data.labels = convertDateTimesToChartLabels(resCropProduction.dateTimes, 'month');
+    companyCharts.cropProduction.data.labels = convertDateTimesToChartLabels(resCropProduction.dateTimes, 'day');
     companyCharts.cropProduction.data.datasets = [];
     resCropProduction.datasets.forEach((dataset) => {
         companyCharts.cropProduction.data.datasets.push({

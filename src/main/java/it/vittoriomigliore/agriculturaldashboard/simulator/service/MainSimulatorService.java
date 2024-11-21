@@ -60,7 +60,7 @@ public class MainSimulatorService {
         List<Field> fields = fieldService.getAllFields();
         fields.forEach(field -> {
             LocalDate current = LocalDate.now();
-            if (productionService.existsProductionByFieldAndHarvestDate(field, current)) {
+            if (!productionService.existsProductionByFieldAndHarvestDate(field, current)) {
                 BigDecimal value = BigDecimal.valueOf(productionSimulator.simulate());
                 Production production = new Production();
                 production.setField(field);

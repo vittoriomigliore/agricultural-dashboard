@@ -36,12 +36,8 @@ public class ProductionService {
         return productionRepository.findFirstByFieldOrderByHarvestDateDesc(field);
     }
 
-    public BigDecimal productionSumByFieldAndMonth(Field field, Month month) {
-        int currentYear = LocalDate.now().getYear();
-        Year currentYearObject = Year.of(currentYear);
-        LocalDate startDate = LocalDate.of(currentYear, month, 1);
-        LocalDate endDate = LocalDate.of(currentYear, month, month.length(currentYearObject.isLeap()));
-        return productionRepository.sumProductionByFieldAndHarvestDateBetween(field, startDate, endDate);
+    public BigDecimal productionSumByFieldAndDate(Field field, LocalDate date) {
+        return productionRepository.sumProductionByFieldAndHarvestDateBetween(field, date, date);
     }
 
     public BigDecimal productionSumByMonth(Month month) {
