@@ -8,6 +8,8 @@ The primary goal is to improve decision-making by presenting data in a clear and
 Through real-time data simulation and visualization, the platform allows users to explore insights that can enhance productivity and sustainability.  
 Though still in its early stages, it lays the groundwork for more interactive features and real-world applications.
 
+<img src="docs/screenshots/img-demo1.png?raw=true" alt="Demo Screenshot 1" width="50%"><img src="docs/screenshots/img-demo2.png?raw=true" alt="Demo Screenshot 2" width="50%">
+
 ## Features
 
 - **Real-Time Data Visualization**: Displays real-time metrics such as crop yield, resource usage, and environmental
