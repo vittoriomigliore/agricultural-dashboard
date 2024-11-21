@@ -6,7 +6,6 @@ import it.vittoriomigliore.agriculturaldashboard.core.repository.IrrigationRepos
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -22,8 +21,7 @@ public class IrrigationService {
         return irrigationRepository.save(irrigation);
     }
 
-    public List<Irrigation> getLastFiveMinutesIrrigationByField(Field field) {
-        LocalDateTime dateTime = LocalDateTime.now().minusMinutes(5);
-        return irrigationRepository.findByFieldAndAfterDateTime(field, dateTime);
+    public List<Irrigation> getLastFiveIrrigationByField(Field field) {
+        return irrigationRepository.findTop5ByField(field);
     }
 }

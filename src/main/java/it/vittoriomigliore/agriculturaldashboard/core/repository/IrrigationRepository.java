@@ -11,7 +11,6 @@ import java.util.List;
 
 public interface IrrigationRepository extends JpaRepository<Irrigation, Integer> {
 
-    @Query("SELECT w FROM Irrigation w WHERE w.dateTime >= :dateTime AND w.field = :field")
-    List<Irrigation> findByFieldAndAfterDateTime(@Param("field") Field field, @Param("dateTime") LocalDateTime dateTime);
+    List<Irrigation> findTop5ByField(Field field);
 
 }

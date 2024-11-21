@@ -6,7 +6,6 @@ import it.vittoriomigliore.agriculturaldashboard.core.repository.WeatherReposito
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -23,8 +22,7 @@ public class WeatherService {
         return weatherRepository.save(weather);
     }
 
-    public List<Weather> getLastFiveMinutesWeatherByField(Field field) {
-        LocalDateTime dateTime = LocalDateTime.now().minusMinutes(5);
-        return weatherRepository.findByFieldAndAfterDateTime(field, dateTime);
+    public List<Weather> getLastFiveWeatherByField(Field field) {
+        return weatherRepository.findTop5ByField(field);
     }
 }

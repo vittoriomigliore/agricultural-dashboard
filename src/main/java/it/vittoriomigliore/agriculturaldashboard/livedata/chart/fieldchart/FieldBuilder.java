@@ -30,10 +30,10 @@ public class FieldBuilder {
         for (Field field : fields) {
             FieldChartsDto fieldChartsDto = new FieldChartsDto(field);
 
-            List<Weather> weatherList = weatherService.getLastFiveMinutesWeatherByField(field);
+            List<Weather> weatherList = weatherService.getLastFiveWeatherByField(field);
             weatherList.forEach((fieldChartsDto::addWeather));
 
-            List<Irrigation> irrigationList = irrigationService.getLastFiveMinutesIrrigationByField(field);
+            List<Irrigation> irrigationList = irrigationService.getLastFiveIrrigationByField(field);
             irrigationList.forEach((fieldChartsDto::addIrrigation));
 
             fieldChartsDtos.add(fieldChartsDto);

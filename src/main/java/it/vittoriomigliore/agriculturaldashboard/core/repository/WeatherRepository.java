@@ -11,6 +11,5 @@ import java.util.List;
 
 public interface WeatherRepository extends JpaRepository<Weather, Integer> {
 
-    @Query("SELECT w FROM Weather w WHERE w.dateTime >= :dateTime AND w.field = :field")
-    List<Weather> findByFieldAndAfterDateTime(@Param("field") Field field, @Param("dateTime") LocalDateTime dateTime);
+    List<Weather> findTop5ByField(Field field);
 }
