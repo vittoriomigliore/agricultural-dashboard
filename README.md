@@ -1,7 +1,5 @@
 # Agricultural Dashboard
 
-## Description
-
 This project is a prototype developed as part of my university final project, aiming to provide an intuitive platform for monitoring and analyzing key metrics in the agricultural sector.  
 Designed with small to medium-sized farms in mind, it helps businesses track crop performance, resource usage, and environmental conditions.  
 The primary goal is to improve decision-making by presenting data in a clear and actionable format.  
@@ -26,7 +24,7 @@ Though still in its early stages, it lays the groundwork for more interactive fe
 - **H2 Database**
 - **Gradle**
 
-### Installation and Setup
+## Installation and Setup
 
 1. Clone the repository:
    ```bash
@@ -52,7 +50,7 @@ Though still in its early stages, it lays the groundwork for more interactive fe
    http://localhost:8080
    ```
 
-### Potential Applications
+## Potential Applications
 - **Small to Medium-Sized Farms**: Enables agricultural SMEs to digitize and monitor their operations with minimal investment.
 - **Prototype and Research Tool**: Serves as a testbed for experimenting with agricultural innovations, such as new cultivation techniques or business models. 
 - **Educational Platform**: Provides a learning environment for agricultural students or practitioners interested in data-driven farming.
