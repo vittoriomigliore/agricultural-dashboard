@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: 06_sale
+      author: vmigliore
+      runOnChange: true
+      changes:
+        - createTable:
+            tableName: sale
+            columns:
+              - column:
+                  name: sale_id
+                  type: INT
+                  constraints:
+                    primaryKey: true
+                  autoIncrement: true
+              - column:
+                  name: production_id
+                  type: INT
+              - column:
+                  name: date
+                  type: TIMESTAMP
+              - column:
+                  name: quantity_sold
+                  type: DECIMAL(10, 2)
+              - column:
+                  name: sale_price_per_unit
+                  type: DECIMAL(10, 2)
+        - addForeignKeyConstraint:
+            baseTableName: sale
+            constraintName: fk_sale_production
+            baseColumnNames: production_id
+            referencedTableName: production
+            referencedColumnNames: production_id

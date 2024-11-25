@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: 05_production
+      author: vmigliore
+      runOnChange: true
+      changes:
+        - createTable:
+            tableName: production
+            columns:
+              - column:
+                  name: production_id
+                  type: INT
+                  constraints:
+                    primaryKey: true
+                  autoIncrement: true
+              - column:
+                  name: field_id
+                  type: INT
+              - column:
+                  name: harvest_date
+                  type: TIMESTAMP
+              - column:
+                  name: quantity
+                  type: DECIMAL(10, 2)
+        - addForeignKeyConstraint:
+            baseTableName: production
+            constraintName: fk_production_field
+            baseColumnNames: field_id
+            referencedTableName: field
+            referencedColumnNames: field_id

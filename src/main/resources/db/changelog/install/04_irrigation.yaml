@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 04_irrigation
+      author: vmigliore
+      changes:
+        - createTable:
+            tableName: irrigation
+            columns:
+              - column:
+                  name: irrigation_id
+                  type: INT
+                  constraints:
+                    primaryKey: true
+                  autoIncrement: true
+              - column:
+                  name: field_id
+                  type: INT
+              - column:
+                  name: datetime
+                  type: TIMESTAMP
+              - column:
+                  name: amount_used
+                  type: DECIMAL(10, 2)
+        - addForeignKeyConstraint:
+            baseTableName: irrigation
+            constraintName: fk_irrigation_field
+            baseColumnNames: field_id
+            referencedTableName: field
+            referencedColumnNames: field_id

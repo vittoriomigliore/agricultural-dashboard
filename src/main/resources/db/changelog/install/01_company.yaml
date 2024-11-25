@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 01_company
+      author: vmigliore
+      runOnChange: true
+      changes:
+        - createTable:
+            tableName: company
+            columns:
+              - column:
+                  name: company_id
+                  type: INT
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)

@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: 07_cost
+      author: vmigliore
+      runOnChange: true
+      changes:
+        - createTable:
+            tableName: cost
+            columns:
+              - column:
+                  name: cost_id
+                  type: INT
+                  constraints:
+                    primaryKey: true
+                  autoIncrement: true
+              - column:
+                  name: field_id
+                  type: INT
+              - column:
+                  name: date
+                  type: TIMESTAMP
+              - column:
+                  name: amount
+                  type: DECIMAL(10, 2)
+        - addForeignKeyConstraint:
+            baseTableName: cost
+            constraintName: fk_cost_field
+            baseColumnNames: field_id
+            referencedTableName: field
+            referencedColumnNames: field_id

@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 02_crop
+      author: vmigliore
+      runOnChange: true
+      changes:
+        - createTable:
+            tableName: crop
+            columns:
+              - column:
+                  name: crop_id
+                  type: INT
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)

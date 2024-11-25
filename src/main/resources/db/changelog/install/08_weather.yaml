@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - changeSet:
+      id: 08_weather
+      author: vmigliore
+      runOnChange: true
+      changes:
+        - createTable:
+            tableName: weather
+            columns:
+              - column:
+                  name: weather_id
+                  type: INT
+                  constraints:
+                    primaryKey: true
+                  autoIncrement: true
+              - column:
+                  name: field_id
+                  type: INT
+              - column:
+                  name: datetime
+                  type: TIMESTAMP
+              - column:
+                  name: temperature
+                  type: DECIMAL(5, 2)
+              - column:
+                  name: precipitation
+                  type: DECIMAL(5, 2)
+              - column:
+                  name: humidity
+                  type: DECIMAL(5, 2)
+              - column:
+                  name: wind_speed
+                  type: DECIMAL(5, 2)
+        - addForeignKeyConstraint:
+            baseTableName: weather
+            constraintName: fk_weather_field
+            baseColumnNames: field_id
+            referencedTableName: field
+            referencedColumnNames: field_id

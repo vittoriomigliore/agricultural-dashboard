@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: 03_field
+      author: vmigliore
+      runOnChange: true
+      changes:
+        - createTable:
+            tableName: field
+            columns:
+              - column:
+                  name: field_id
+                  type: INT
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: company_id
+                  type: INT
+              - column:
+                  name: crop_id
+                  type: INT
+              - column:
+                  name: size
+                  type: DECIMAL(10, 2)
+        - addForeignKeyConstraint:
+            baseTableName: field
+            constraintName: fk_field_company
+            baseColumnNames: company_id
+            referencedTableName: company
+            referencedColumnNames: company_id
+        - addForeignKeyConstraint:
+            baseTableName: field
+            constraintName: fk_field_crop
+            baseColumnNames: crop_id
+            referencedTableName: crop
+            referencedColumnNames: crop_id
