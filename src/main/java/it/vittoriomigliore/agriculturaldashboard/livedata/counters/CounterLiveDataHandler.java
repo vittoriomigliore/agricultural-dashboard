@@ -11,6 +11,7 @@ import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
+import org.springframework.lang.NonNull;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,7 +21,6 @@ import java.util.concurrent.CopyOnWriteArraySet;
 
 @Component
 public class CounterLiveDataHandler extends TextWebSocketHandler {
-
     private final CostService costService;
     private final SaleService saleService;
     private final ObjectMapper objectMapper;
@@ -34,9 +34,7 @@ public class CounterLiveDataHandler extends TextWebSocketHandler {
     }
 
     @Override
-    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        // TODO: improve logging TRACE
-
+    public void afterConnectionEstablished(@NonNull WebSocketSession session) throws Exception {
         sessions.add(session);
         String jsonData = getPayload();
 
@@ -44,17 +42,12 @@ public class CounterLiveDataHandler extends TextWebSocketHandler {
     }
 
     @Override
-    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        // TODO: improve logging TRACE
-
+    public void afterConnectionClosed(@NonNull WebSocketSession session, @NonNull CloseStatus status) throws Exception {
         sessions.remove(session);
     }
 
     @Scheduled(fixedRateString = "${counter.update.rate}")
     public void broadcastData() throws IOException {
-        // TODO: improve logging TRACE
-
-
         String jsonData = getPayload();
 
         System.out.println("Sending data to WebSocket clients: " + jsonData);
@@ -84,7 +77,6 @@ public class CounterLiveDataHandler extends TextWebSocketHandler {
         try {
             return objectMapper.writeValueAsString(counterDtoList);
         } catch (JsonProcessingException e) {
-            // TODO: improve logging
             e.printStackTrace();
             return "[]";
         }

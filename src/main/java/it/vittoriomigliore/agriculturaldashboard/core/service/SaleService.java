@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
-import java.util.List;
 
 @Service
 public class SaleService {

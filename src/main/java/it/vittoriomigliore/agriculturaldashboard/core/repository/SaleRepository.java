@@ -7,7 +7,6 @@ import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
 public interface SaleRepository extends JpaRepository<Sale, Integer> {
 

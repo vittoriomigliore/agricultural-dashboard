@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.vittoriomigliore.agriculturaldashboard.livedata.chart.companychart.CompanyBuilder;
 import it.vittoriomigliore.agriculturaldashboard.livedata.chart.fieldchart.FieldBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -11,6 +13,7 @@ import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
+import org.springframework.lang.NonNull;
 
 import java.io.IOException;
 import java.util.Set;
@@ -18,6 +21,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 
 @Component
 public class ChartLiveDataHandler extends TextWebSocketHandler {
+    private static final Logger log = LoggerFactory.getLogger(ChartLiveDataHandler.class);
     private final FieldBuilder fieldBuilder;
     private final CompanyBuilder companyBuilder;
     private final ObjectMapper objectMapper;
@@ -32,26 +36,22 @@ public class ChartLiveDataHandler extends TextWebSocketHandler {
     }
 
     @Override
-    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+    public void afterConnectionEstablished(@NonNull WebSocketSession session) throws Exception {
         sessions.add(session);
         String jsonData = getPayload();
-
         session.sendMessage(new TextMessage(jsonData));
     }
 
     @Override
-    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+    public void afterConnectionClosed(@NonNull WebSocketSession session, @NonNull CloseStatus status) throws Exception {
         sessions.remove(session);
     }
 
     @Scheduled(fixedRateString = "${chart.update.rate}")
     public void broadcastData() throws IOException {
-
         String jsonData = getPayload();
-
-        // TODO: improve logging TRACE
-        System.out.println("Sending data to WebSocket clients: " + jsonData);
-
+        log.trace("Sending data to WebSocket clients: {}", jsonData);
+        
         for (WebSocketSession session : sessions) {
             if (session.isOpen()) {
                 session.sendMessage(new TextMessage(jsonData));
@@ -68,8 +68,7 @@ public class ChartLiveDataHandler extends TextWebSocketHandler {
         try {
             return objectMapper.writeValueAsString(payloadDto);
         } catch (JsonProcessingException e) {
-            // TODO: improve logging
-            e.printStackTrace();
+            log.error("Error processing JSON payload", e);
             return "{}";
         }
     }
