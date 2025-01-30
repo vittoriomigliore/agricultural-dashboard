@@ -1,9 +1,11 @@
 package it.vittoriomigliore.agriculturaldashboard.simulator;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.TestPropertySource;
 
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
+@TestPropertySource(locations = "classpath:application-test.properties")
 public abstract class BaseMetricSimulatorTest {
 
     protected BaseMetricSimulator simulator;
