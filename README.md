@@ -8,6 +8,14 @@ Though still in its early stages, it lays the groundwork for more interactive fe
 
 <img src="docs/screenshots/img-demo1.png?raw=true" alt="Demo Screenshot 1" width="50%"><img src="docs/screenshots/img-demo2.png?raw=true" alt="Demo Screenshot 2" width="50%">
 
+## Live Demo
+
+You can try the live demo of the Agricultural Dashboard here:
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-🌐-darkgreen)](https://agricultural-dashboard-agoi.onrender.com/)
+
+*(Note: If the demo is unavailable, please contact me for assistance.)*
+
 ## Features
 
 - **Real-Time Data Visualization**: Displays real-time metrics such as crop yield, resource usage, and environmental
