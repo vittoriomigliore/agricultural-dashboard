@@ -34,29 +34,60 @@ You can try the live demo of the Agricultural Dashboard here:
 
 ## Installation and Setup
 
-1. Clone the repository:
-   ```bash
+### Development Setup (H2 Database)
+
+1. **Clone the repository:**
+
+   ```sh
    git clone https://github.com/vittoriomigliore/agricultural-dashboard.git
    cd agricultural-dashboard
    ```
-2. Configure the database:  
-   By default, the application uses H2 Database for development.  
-   To use a different database, modify the connection settings in `application.properties` accordingly.
-3. Set up the database schema:  
-   The application uses Liquibase for database migration. On application startup, Liquibase will automatically apply the necessary schema changes.
-4. Build the project:
-   ```bash
+
+2. **Build the project:**
+
+   ```sh
    ./gradlew build
    ```
-5. Run the application:
-   ```bash
+
+3. **Run the application with the **`dev`** profile (H2 mode):**
+
+   ```sh
+   ./gradlew bootRun --args='--spring.profiles.active=dev'
+   ```
+
+   Alternatively, you can set the profile via an environment variable:
+
+   ```sh
+   export SPRING_PROFILES_ACTIVE=dev
    ./gradlew bootRun
    ```
-6. Access the dashboard:
-   Open a web browser and navigate to:  
+
+4. The application should now be running on `http://localhost:8080`.\
+   The in-memory H2 database can be accessed via its console at `http://localhost:8080/h2-console` using the configured credentials in `application-dev.properties`.
+
+---
+
+### Production Setup (PostgreSQL + Docker)
+
+1. **Set up PostgreSQL database:**
+
+   - Ensure a PostgreSQL instance is running.
+   - Create a new database and note the connection details.
+
+2. **Set the required environment variables:**
+
+   ```sh
+   export JDBC_DATABASE_URL="jdbc:postgresql://<DB_HOST>:<DB_PORT>/<DB_NAME>?user=<DB_USER>&password=<DB_PASSWORD>"
    ```
-   http://localhost:8080
+
+3. **Build and run using Docker:**
+
+   ```sh
+   docker build -t agricultural-dashboard .
+   docker run -p 8080:8080 -e JDBC_DATABASE_URL="$JDBC_DATABASE_URL" agricultural-dashboard
    ```
+
+4. The application should now be running on `http://localhost:8080`.
 
 ## Potential Applications
 - **Small to Medium-Sized Farms**: Enables agricultural SMEs to digitize and monitor their operations with minimal investment.
